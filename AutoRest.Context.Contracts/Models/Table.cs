@@ -8,7 +8,7 @@
         /// <summary>
         /// Номер
         /// </summary>
-        public string TableNumber { get; set; } = string.Empty;
+        public string Number { get; set; } = string.Empty;
 
         /// <summary>
         /// Заказы связь один ко многим

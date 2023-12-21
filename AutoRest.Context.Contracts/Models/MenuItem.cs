@@ -15,5 +15,10 @@
         /// </summary>
         public decimal Cost { get; set; } = 0;
 
+        /// <summary>
+        /// Нужна для связи один ко многим по вторичному ключу <see cref="OrderItem"/>
+        /// </summary>
+        public ICollection<OrderItem>? OrderItem { get; set; }
+
     }
 }

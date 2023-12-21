@@ -8,11 +8,11 @@
         /// <summary>
         /// Номер
         /// </summary>
-        public string TableNumber { get; set; } = string.Empty;
+        public string Number { get; set; } = string.Empty;
 
         /// <summary>
         /// Заказы связь один ко многим
         /// </summary>
-        public ICollection<OrderItem>? Orders { get; set; }
+        public ICollection<OrderItem>? OrderItem { get; set; }
     }
 }

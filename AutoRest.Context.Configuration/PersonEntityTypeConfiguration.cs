@@ -12,19 +12,19 @@ namespace AutoRest.Context.Configuration
             builder.ToTable("Persons");
             builder.HasIdAsKey();
             builder.PropertyAuditConfiguration();
-            builder.Property(x => x.Name)
+            builder.Property(x => x.FirstName)
                 .HasMaxLength(200)
                 .IsRequired();
 
             builder
-                .HasMany(x => x.AutoRestItem)
+                .HasMany(x => x.Employee)
                 .WithOne(x => x.Person)
                 .HasForeignKey(x => x.PersonId);
 
-            builder.HasIndex(x => x.Name)
+            builder.HasIndex(x => x.LastName)
                 .IsUnique()
                 .HasFilter($"{nameof(Person.DeletedAt)} is null")
-                .HasDatabaseName($"IX_{nameof(Person)}_{nameof(Person.Name)}");
+                .HasDatabaseName($"IX_{nameof(Person)}_{nameof(Person.LastName)}");
         }
     }
 }

@@ -13,6 +13,6 @@
         /// <summary>
         /// Заказы связь один ко многим
         /// </summary>
-        public ICollection<OrderItem>? Orders { get; set; }
+        public ICollection<OrderItem>? OrderItem { get; set; }
     }
 }

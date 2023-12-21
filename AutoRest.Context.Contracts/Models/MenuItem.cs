@@ -8,12 +8,17 @@
         /// <summary>
         /// Название
         /// </summary>
-        public string MenuItemTitle { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
 
         /// <summary>
         /// Стоимость
         /// </summary>
-        public decimal MenuItemCost { get; set; } = 100;
+        public decimal Cost { get; set; } = 0;
+
+        /// <summary>
+        /// Нужна для связи один ко многим по вторичному ключу <see cref="OrderItem"/>
+        /// </summary>
+        public ICollection<OrderItem>? OrderItem { get; set; }
 
     }
 }

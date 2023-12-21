@@ -1,5 +1,4 @@
-﻿using AutoRest.Context.Configuration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using AutoRest.Context.Contracts.Models;
 
@@ -12,19 +11,16 @@ namespace AutoRest.Context.Configuration
             builder.ToTable("Persons");
             builder.HasIdAsKey();
             builder.PropertyAuditConfiguration();
-            builder.Property(x => x.Name)
-                .HasMaxLength(200)
-                .IsRequired();
+            builder.Property(x => x.FirstName).IsRequired();
+            builder.Property(x => x.LastName).IsRequired();
 
             builder
-                .HasMany(x => x.AutoRestItem)
-                .WithOne(x => x.Person)
-                .HasForeignKey(x => x.PersonId);
+               .HasMany(x => x.Employee)
+               .WithOne(x => x.Person)
+               .HasForeignKey(x => x.PersonId);
 
-            builder.HasIndex(x => x.Name)
-                .IsUnique()
-                .HasFilter($"{nameof(Person.DeletedAt)} is null")
-                .HasDatabaseName($"IX_{nameof(Person)}_{nameof(Person.Name)}");
+            builder.HasIndex(x => x.LastName)
+                .HasDatabaseName($"IX_{nameof(Person)}_{nameof(Person.LastName)}");
         }
     }
 }

@@ -13,7 +13,7 @@ namespace AutoRest.Context.Contracts.Models
         /// <summary>
         /// Номер карты лояльности
         /// </summary>
-        public string LoyaltyCardNumber { get; set; } = string.Empty;
+        public string Number { get; set; } = string.Empty;
 
         /// <summary>
         /// Нужна для связи один ко многим по вторичному ключу <see cref="OrderItem"/>

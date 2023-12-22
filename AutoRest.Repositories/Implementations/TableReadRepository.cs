@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using AutoRest.Common.Entity.InterfaceDB;
+﻿using AutoRest.Common.Entity.InterfaceDB;
 using AutoRest.Common.Entity.Repositories;
 using AutoRest.Context.Contracts.Models;
 using AutoRest.Repositories.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoRest.Repositories.Implementations
 {

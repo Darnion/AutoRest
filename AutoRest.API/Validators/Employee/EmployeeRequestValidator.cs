@@ -1,6 +1,6 @@
-﻿using FluentValidation;
-using AutoRest.Api.ModelsRequest.Employee;
+﻿using AutoRest.Api.ModelsRequest.Employee;
 using AutoRest.Repositories.Contracts;
+using FluentValidation;
 
 namespace AutoRest.Api.Validators.Employee
 {

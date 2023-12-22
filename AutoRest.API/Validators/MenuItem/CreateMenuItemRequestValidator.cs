@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using AutoRest.Api.ModelsRequest.MenuItem;
+﻿using AutoRest.Api.ModelsRequest.MenuItem;
+using FluentValidation;
 
 namespace AutoRest.Api.Validators.MenuItem
 {

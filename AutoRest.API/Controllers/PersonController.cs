@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using AutoRest.Services.Contracts.Interfaces;
-using AutoRest.Services.Contracts.ModelsRequest;
-using Microsoft.AspNetCore.Mvc;
 using AutoRest.Api.Attribute;
 using AutoRest.Api.Infrastructures.Validator;
 using AutoRest.Api.Models;
 using AutoRest.Api.ModelsRequest.Person;
+using AutoRest.Services.Contracts.Interfaces;
+using AutoRest.Services.Contracts.ModelsRequest;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AutoRest.Api.Controllers
 {

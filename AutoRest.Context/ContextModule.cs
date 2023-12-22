@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using AutoRest.Common;
+﻿using AutoRest.Common;
 using AutoRest.Common.Entity.InterfaceDB;
 using AutoRest.Context.Contracts;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace AutoRest.Context
 {

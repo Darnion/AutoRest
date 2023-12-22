@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using AutoRest.Api.ModelsRequest.OrderItem;
+﻿using AutoRest.Api.ModelsRequest.OrderItem;
+using FluentValidation;
 
 namespace AutoRest.Api.Validators.OrderItem
 {

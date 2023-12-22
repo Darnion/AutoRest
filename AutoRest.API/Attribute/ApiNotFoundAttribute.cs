@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using AutoRest.Api.Models.Exceptions;
+﻿using AutoRest.Api.Models.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AutoRest.Api.Attribute
 {

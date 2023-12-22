@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using AutoRest.Api.ModelsRequest.Table;
+﻿using AutoRest.Api.ModelsRequest.Table;
+using FluentValidation;
 
 namespace AutoRest.Api.Validators.Table
 {

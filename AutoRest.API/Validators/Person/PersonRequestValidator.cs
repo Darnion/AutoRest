@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using AutoRest.Api.ModelsRequest.Person;
+﻿using AutoRest.Api.ModelsRequest.Person;
+using FluentValidation;
 
 namespace AutoRest.Api.Validators.Person
 {

@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using AutoRest.Common.Entity;
-using AutoRest.Common.Entity.EntityInterface;
+﻿using AutoRest.Common.Entity.EntityInterface;
 using AutoRest.Common.Entity.InterfaceDB;
 using AutoRest.Repositories.Contracts;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AutoRest.Repositories
 {

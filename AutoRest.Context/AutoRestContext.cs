@@ -1,8 +1,8 @@
 ﻿using AutoRest.Common.Entity.InterfaceDB;
-using AutoRest.Context.Contracts.Models;
-using AutoRest.Context.Contracts;
-using Microsoft.EntityFrameworkCore;
 using AutoRest.Context.Configuration;
+using AutoRest.Context.Contracts;
+using AutoRest.Context.Contracts.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoRest.Context
 {

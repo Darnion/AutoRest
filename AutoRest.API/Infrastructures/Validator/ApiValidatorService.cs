@@ -1,13 +1,13 @@
-﻿using FluentValidation;
+﻿using AutoRest.Api.Validators.Employee;
 using AutoRest.Api.Validators.LoyaltyCard;
 using AutoRest.Api.Validators.MenuItem;
-using AutoRest.Api.Validators.Employee;
-using AutoRest.Api.Validators.Table;
-using AutoRest.Api.Validators.Person;
 using AutoRest.Api.Validators.OrderItem;
+using AutoRest.Api.Validators.Person;
+using AutoRest.Api.Validators.Table;
 using AutoRest.Repositories.Contracts;
 using AutoRest.Services.Contracts.Exceptions;
 using AutoRest.Shared;
+using FluentValidation;
 
 namespace AutoRest.Api.Infrastructures.Validator
 {

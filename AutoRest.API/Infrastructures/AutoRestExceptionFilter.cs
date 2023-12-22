@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using AutoRest.Api.Models.Exceptions;
+﻿using AutoRest.Api.Models.Exceptions;
 using AutoRest.Services.Contracts.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace AutoRest.Api.Infrastructures
 {

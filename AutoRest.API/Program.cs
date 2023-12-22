@@ -1,15 +1,18 @@
-using Microsoft.EntityFrameworkCore;
 using AutoRest.Api.Infrastructures;
 using AutoRest.Context;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(x =>
 {
-    x.Filters.Add<AutoRestExceptionFilter>();
+    //x.Filters.Add<AutoRestExceptionFilter>();
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.GetSwaggerDocument();
+
+// У кого логгер есть - тот использует это
+//builder.Services.AddLoggerRegistr();
 
 builder.Services.AddDependencies();
 

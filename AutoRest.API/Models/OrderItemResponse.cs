@@ -1,6 +1,4 @@
-﻿using AutoRest.Context.Contracts.Models;
-
-namespace AutoRest.Api.Models
+﻿namespace AutoRest.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности заказа

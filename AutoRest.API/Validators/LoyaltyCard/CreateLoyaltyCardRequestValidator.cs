@@ -1,5 +1,5 @@
-﻿using FluentValidation;
-using AutoRest.Api.ModelsRequest.LoyaltyCard;
+﻿using AutoRest.Api.ModelsRequest.LoyaltyCard;
+using FluentValidation;
 
 namespace AutoRest.Api.Validators.LoyaltyCard
 {

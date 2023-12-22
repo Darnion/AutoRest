@@ -1,9 +1,6 @@
-﻿namespace AutoRest.Services.Contracts.Models
+﻿namespace AutoRest.Services.Contracts.ModelsRequest
 {
-    /// <summary>
-    /// Модель столика
-    /// </summary>
-    public class TableModel
+    public class TableRequestModel
     {
         /// <summary>
         /// Идентификатор

@@ -1,9 +1,8 @@
-﻿namespace AutoRest.Services.Contracts.Models
+﻿using AutoRest.Services.Contracts.Models;
+
+namespace AutoRest.Services.Contracts.ModelsRequest
 {
-    /// <summary>
-    /// Модель "Заказ"
-    /// </summary>
-    public class OrderItemModel
+    public class OrderItemRequestModel
     {
         /// <summary>
         /// Идентификатор
@@ -13,22 +12,22 @@
         /// <summary>
         /// <inheritdoc cref="EmployeeModel"/>
         /// </summary>
-        public EmployeeModel? EmployeeWaiter { get; set; }
+        public Guid EmployeeWaiterId { get; set; }
 
         /// <summary>
         /// <inheritdoc cref="TableModel"/>
         /// </summary>
-        public TableModel? Table { get; set; }
+        public Guid TableId { get; set; }
 
         /// <summary>
         /// <inheritdoc cref="MenuItemModel"/>
         /// </summary>
-        public MenuItemModel? MenuItem { get; set; }
+        public Guid MenuItemId { get; set; }
 
         /// <summary>
         /// <inheritdoc cref="LoyaltyCardModel"/>
         /// </summary>
-        public LoyaltyCardModel? LoyaltyCard { get; set; }
+        public Guid LoyaltyCardId { get; set; }
 
         /// <summary>
         /// Статус заказа
@@ -38,6 +37,6 @@
         /// <summary>
         /// <inheritdoc cref="EmployeeModel"/>
         /// </summary>
-        public EmployeeModel? EmployeeCashier { get; set; }
+        public Guid EmployeeCashierId { get; set; }
     }
 }

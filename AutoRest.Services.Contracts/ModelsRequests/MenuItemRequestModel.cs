@@ -1,9 +1,6 @@
-﻿namespace AutoRest.Services.Contracts.Models
+﻿namespace AutoRest.Services.Contracts.ModelsRequest
 {
-    /// <summary>
-    /// Модель "Позиции"
-    /// </summary>
-    public class MenuItemModel
+    public class MenuItemRequestModel
     {
         /// <summary>
         /// Идентификатор

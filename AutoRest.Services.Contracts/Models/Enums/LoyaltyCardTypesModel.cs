@@ -1,4 +1,4 @@
-﻿namespace AutoRest.Context.Contracts.Enums
+﻿namespace AutoRest.Services.Contracts.Enums
 {
     /// <summary>
     /// Модель "Типы карт лояльности"

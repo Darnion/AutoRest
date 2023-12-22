@@ -1,6 +1,6 @@
-﻿using AutoRest.Context.Contracts.Enums;
+﻿using AutoRest.Services.Contracts.Enums;
 
-namespace AutoRest.Context.Contracts.Models
+namespace AutoRest.Services.Contracts.Models
 {
     /// <summary>
     /// Модель "Сотрудник"

@@ -1,9 +1,6 @@
-﻿namespace AutoRest.Services.Contracts.Models
+﻿namespace AutoRest.Services.Contracts.ModelsRequest
 {
-    /// <summary>
-    /// Модель личности
-    /// </summary>
-    public class PersonModel
+    public class PersonRequestModel
     {
         /// <summary>
         /// Идентификатор
@@ -23,6 +20,6 @@
         /// <summary>
         /// Отчество
         /// </summary>
-        public string Patronymic { get; set; } = string.Empty;
+        public string? Patronymic { get; set; }
     }
 }

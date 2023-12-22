@@ -1,11 +1,8 @@
 ﻿using AutoRest.Services.Contracts.Enums;
 
-namespace AutoRest.Services.Contracts.Models
+namespace AutoRest.Services.Contracts.ModelsRequest
 {
-    /// <summary>
-    /// Модель "Карта лояльности"
-    /// </summary>
-    public class LoyaltyCardModel
+    public class LoyaltyCardRequestModel
     {
         /// <summary>
         /// Идентификатор

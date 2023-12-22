@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AutoRest.Context.Contracts\AutoRest.Context.Contracts.csproj" />
+    <ProjectReference Include="..\AutoRest.Shared\AutoRest.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

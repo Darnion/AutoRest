@@ -3,33 +3,35 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.API", "AutoRest.API\AutoRest.API.csproj", "{1E1F273D-A4DB-40B1-BA86-DE908D438CBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.API", "AutoRest.API\AutoRest.API.csproj", "{1E1F273D-A4DB-40B1-BA86-DE908D438CBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.API.Tests", "AutoRest.API.Tests\AutoRest.API.Tests.csproj", "{67D57E21-D5EB-40D8-B8C2-0B45248CA13F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.API.Tests", "AutoRest.API.Tests\AutoRest.API.Tests.csproj", "{67D57E21-D5EB-40D8-B8C2-0B45248CA13F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Common.Entity", "AutoRest.Common.Entity\AutoRest.Common.Entity.csproj", "{D54B7E94-A4E9-48F3-8AB2-8962840BD921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Common.Entity", "AutoRest.Common.Entity\AutoRest.Common.Entity.csproj", "{D54B7E94-A4E9-48F3-8AB2-8962840BD921}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Common", "AutoRest.Common\AutoRest.Common.csproj", "{A8EF09F4-43EB-4269-BF8E-97C0471FEB64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Common", "AutoRest.Common\AutoRest.Common.csproj", "{A8EF09F4-43EB-4269-BF8E-97C0471FEB64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Context.Configuration", "AutoRest.Context.Configuration\AutoRest.Context.Configuration.csproj", "{6E0BC66D-FEDF-4971-8BC1-42DD2C7AB38E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Context.Configuration", "AutoRest.Context.Configuration\AutoRest.Context.Configuration.csproj", "{6E0BC66D-FEDF-4971-8BC1-42DD2C7AB38E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Context.Contracts", "AutoRest.Context.Contracts\AutoRest.Context.Contracts.csproj", "{A494F302-A194-4F70-A0FF-AB9F0094E0A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Context.Contracts", "AutoRest.Context.Contracts\AutoRest.Context.Contracts.csproj", "{A494F302-A194-4F70-A0FF-AB9F0094E0A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Context", "AutoRest.Context\AutoRest.Context.csproj", "{2C7B18B6-FA58-4A10-80A0-41B6B418017A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Context", "AutoRest.Context\AutoRest.Context.csproj", "{2C7B18B6-FA58-4A10-80A0-41B6B418017A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Context.Tests", "AutoRest.Context.Tests\AutoRest.Context.Tests.csproj", "{ABF3289F-CCCF-4B4D-A279-6621858C5BC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Repositories", "AutoRest.Repositories\AutoRest.Repositories.csproj", "{5065232B-3C8F-403D-9CB6-28CC85ED2B1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Repositories", "AutoRest.Repositories\AutoRest.Repositories.csproj", "{5065232B-3C8F-403D-9CB6-28CC85ED2B1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Repositories.Contracts", "AutoRest.Repositories.Contracts\AutoRest.Repositories.Contracts.csproj", "{37613C30-4D86-4398-A762-2C8E389CAEE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Repositories.Contracts", "AutoRest.Repositories.Contracts\AutoRest.Repositories.Contracts.csproj", "{37613C30-4D86-4398-A762-2C8E389CAEE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Services", "AutoRest.Services\AutoRest.Services.csproj", "{3ECCFBBA-D608-41E7-9984-CF4CAAB3170B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Services", "AutoRest.Services\AutoRest.Services.csproj", "{3ECCFBBA-D608-41E7-9984-CF4CAAB3170B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Services.Contracts", "AutoRest.Services.Contracts\AutoRest.Services.Contracts.csproj", "{2F5B45AE-F9AF-4164-AABF-60D6ED368039}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Services.Contracts", "AutoRest.Services.Contracts\AutoRest.Services.Contracts.csproj", "{2F5B45AE-F9AF-4164-AABF-60D6ED368039}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Services.Tests", "AutoRest.Services.Tests\AutoRest.Services.Tests.csproj", "{F165B214-811F-4AED-837E-E20714778C86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Services.Tests", "AutoRest.Services.Tests\AutoRest.Services.Tests.csproj", "{F165B214-811F-4AED-837E-E20714778C86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoRest.Shared", "AutoRest.Shared\AutoRest.Shared.csproj", "{5776E48E-B2E9-4528-AE11-836A10F92B6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Shared", "AutoRest.Shared\AutoRest.Shared.csproj", "{5776E48E-B2E9-4528-AE11-836A10F92B6F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Context.Tests", "AutoRest.Context.Tests\AutoRest.Context.Tests.csproj", "{25848554-5177-4FC2-857E-00CAEE8EE58E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoRest.Repositories.Tests", "AutoRest.Repositories.Tests\AutoRest.Repositories.Tests.csproj", "{5244601C-46ED-4907-8FA9-16B0EA8F007A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,10 +67,6 @@ Global
 		{2C7B18B6-FA58-4A10-80A0-41B6B418017A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C7B18B6-FA58-4A10-80A0-41B6B418017A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C7B18B6-FA58-4A10-80A0-41B6B418017A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABF3289F-CCCF-4B4D-A279-6621858C5BC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABF3289F-CCCF-4B4D-A279-6621858C5BC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABF3289F-CCCF-4B4D-A279-6621858C5BC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABF3289F-CCCF-4B4D-A279-6621858C5BC4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5065232B-3C8F-403D-9CB6-28CC85ED2B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5065232B-3C8F-403D-9CB6-28CC85ED2B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5065232B-3C8F-403D-9CB6-28CC85ED2B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,6 +91,14 @@ Global
 		{5776E48E-B2E9-4528-AE11-836A10F92B6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5776E48E-B2E9-4528-AE11-836A10F92B6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5776E48E-B2E9-4528-AE11-836A10F92B6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25848554-5177-4FC2-857E-00CAEE8EE58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25848554-5177-4FC2-857E-00CAEE8EE58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25848554-5177-4FC2-857E-00CAEE8EE58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25848554-5177-4FC2-857E-00CAEE8EE58E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5244601C-46ED-4907-8FA9-16B0EA8F007A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5244601C-46ED-4907-8FA9-16B0EA8F007A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5244601C-46ED-4907-8FA9-16B0EA8F007A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5244601C-46ED-4907-8FA9-16B0EA8F007A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

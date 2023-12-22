@@ -8,12 +8,12 @@ namespace AutoRest.Api.Infrastructures
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("Discipline", new OpenApiInfo { Title = "Сущность дисциплины", Version = "v1" });
-                c.SwaggerDoc("Document", new OpenApiInfo { Title = "Сущность документы", Version = "v1" });
+                c.SwaggerDoc("LoyaltyCard", new OpenApiInfo { Title = "Сущность карты лояльности", Version = "v1" });
+                c.SwaggerDoc("MenuItem", new OpenApiInfo { Title = "Сущность позиции меню", Version = "v1" });
                 c.SwaggerDoc("Employee", new OpenApiInfo { Title = "Сущность работники", Version = "v1" });
-                c.SwaggerDoc("Group", new OpenApiInfo { Title = "Сущность группы", Version = "v1" });
-                c.SwaggerDoc("Person", new OpenApiInfo { Title = "Сущность ученики", Version = "v1" });
-                c.SwaggerDoc("TimeTableItem", new OpenApiInfo { Title = "Сущность элемент расписания", Version = "v1" });
+                c.SwaggerDoc("Table", new OpenApiInfo { Title = "Сущность столики", Version = "v1" });
+                c.SwaggerDoc("Person", new OpenApiInfo { Title = "Сущность личности", Version = "v1" });
+                c.SwaggerDoc("OrderItem", new OpenApiInfo { Title = "Сущность заказы", Version = "v1" });
 
                 var filePath = Path.Combine(AppContext.BaseDirectory, "AutoRest.Api.xml");
                 c.IncludeXmlComments(filePath);
@@ -24,12 +24,12 @@ namespace AutoRest.Api.Infrastructures
         {
             app.UseSwaggerUI(x =>
             {
-                x.SwaggerEndpoint("Discipline/swagger.json", "Дисциплины");
-                x.SwaggerEndpoint("Document/swagger.json", "Документы");
+                x.SwaggerEndpoint("LoyaltyCard/swagger.json", "Карты лояльности");
+                x.SwaggerEndpoint("MenuItem/swagger.json", "Позиции меню");
                 x.SwaggerEndpoint("Employee/swagger.json", "Работники");
-                x.SwaggerEndpoint("Group/swagger.json", "Группы");
-                x.SwaggerEndpoint("Person/swagger.json", "Ученики");
-                x.SwaggerEndpoint("TimeTableItem/swagger.json", "Элемент расписания");
+                x.SwaggerEndpoint("Table/swagger.json", "Столики");
+                x.SwaggerEndpoint("Person/swagger.json", "Личности");
+                x.SwaggerEndpoint("OrderItem/swagger.json", "Заказы");
             });
         }
     }

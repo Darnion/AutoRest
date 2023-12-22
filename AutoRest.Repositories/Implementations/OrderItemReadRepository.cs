@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using AutoRest.Common.Entity.InterfaceDB;
+﻿using AutoRest.Common.Entity.InterfaceDB;
 using AutoRest.Common.Entity.Repositories;
 using AutoRest.Context.Contracts.Models;
 using AutoRest.Repositories.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoRest.Repositories.Implementations
 {
@@ -28,7 +28,6 @@ namespace AutoRest.Repositories.Implementations
 
         Task<OrderItem?> IOrderItemReadRepository.GetByIdAsync(Guid id, CancellationToken cancellationToken)
             => reader.Read<OrderItem>()
-                .NotDeletedAt()
                 .ById(id)
                 .FirstOrDefaultAsync(cancellationToken);
     }

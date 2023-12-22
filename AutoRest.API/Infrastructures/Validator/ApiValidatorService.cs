@@ -1,13 +1,13 @@
-﻿using FluentValidation;
-using AutoRest.Api.Validators.Discipline;
-using AutoRest.Api.Validators.Document;
-using AutoRest.Api.Validators.Employee;
-using AutoRest.Api.Validators.Group;
+﻿using AutoRest.Api.Validators.Employee;
+using AutoRest.Api.Validators.LoyaltyCard;
+using AutoRest.Api.Validators.MenuItem;
+using AutoRest.Api.Validators.OrderItem;
 using AutoRest.Api.Validators.Person;
-using AutoRest.Api.Validators.TimeTableItem;
+using AutoRest.Api.Validators.Table;
 using AutoRest.Repositories.Contracts;
 using AutoRest.Services.Contracts.Exceptions;
 using AutoRest.Shared;
+using FluentValidation;
 
 namespace AutoRest.Api.Infrastructures.Validator
 {
@@ -17,26 +17,26 @@ namespace AutoRest.Api.Infrastructures.Validator
 
         public ApiValidatorService(IPersonReadRepository personReadRepository,
             IEmployeeReadRepository employeeReadRepository,
-            IDisciplineReadRepository disciplineReadRepository,
-            IGroupReadRepository groupReadRepository)
+            ILoyaltyCardReadRepository loyaltycardReadRepository,
+            ITableReadRepository tableReadRepository)
         {
-            Register<CreateDisciplineRequestValidator>();
-            Register<DisciplineRequestValidator>();
+            Register<CreateLoyaltyCardRequestValidator>();
+            Register<LoyaltyCardRequestValidator>();
 
-            Register<CreateDocumentRequestValidator>(personReadRepository);
-            Register<DocumentRequestValidator>(personReadRepository);
+            Register<CreateMenuItemRequestValidator>(personReadRepository);
+            Register<MenuItemRequestValidator>(personReadRepository);
 
             Register<CreateEmployeeRequestValidator>(personReadRepository);
             Register<EmployeeRequestValidator>(personReadRepository);
 
-            Register<CreateGroupRequestValidator>(employeeReadRepository);
-            Register<GroupRequestValidator>(employeeReadRepository);
+            Register<CreateTableRequestValidator>(employeeReadRepository);
+            Register<TableRequestValidator>(employeeReadRepository);
 
             Register<CreatePersonRequestValidator>();
             Register<PersonRequestValidator>();
 
-            Register<CreateTimeTableItemRequestValidator>(employeeReadRepository, disciplineReadRepository, groupReadRepository);
-            Register<TimeTableItemRequestValidator>(employeeReadRepository, disciplineReadRepository, groupReadRepository);
+            Register<CreateOrderItemRequestValidator>(employeeReadRepository, loyaltycardReadRepository, tableReadRepository);
+            Register<OrderItemRequestValidator>(employeeReadRepository, loyaltycardReadRepository, tableReadRepository);
         }
 
         ///<summary>
@@ -80,7 +80,7 @@ namespace AutoRest.Api.Infrastructures.Validator
 
             if (!result.IsValid)
             {
-                throw new TimeTableValidationException(result.Errors.Select(x =>
+                throw new AutoRestValidationException(result.Errors.Select(x =>
                 InvalidateItemModel.New(x.PropertyName, x.ErrorMessage)));
             }
         }

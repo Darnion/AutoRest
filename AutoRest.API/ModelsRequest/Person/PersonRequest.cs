@@ -1,4 +1,4 @@
-﻿namespace TimeTable203.Api.ModelsRequest.Person
+﻿namespace AutoRest.Api.ModelsRequest.Person
 {
     public class PersonRequest : CreatePersonRequest
     {

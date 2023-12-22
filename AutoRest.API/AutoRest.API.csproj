@@ -27,8 +27,4 @@
     <ProjectReference Include="..\AutoRest.Services\AutoRest.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Validators\MenuItem\" />
-  </ItemGroup>
-
 </Project>

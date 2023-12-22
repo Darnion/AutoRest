@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
+using AutoRest.Api.Attribute;
+using AutoRest.Api.Infrastructures.Validator;
+using AutoRest.Api.Models;
+using AutoRest.Api.ModelsRequest.Employee;
 using AutoRest.Services.Contracts.Interfaces;
 using AutoRest.Services.Contracts.ModelsRequest;
 using Microsoft.AspNetCore.Mvc;
-using AutoRest.Api.Attribute;
-//using AutoRest.Api.Infrastructures.Validator;
-using AutoRest.Api.Models;
-using AutoRest.Api.ModelsRequest.Employee;
-using AutoRest.Services.Contracts.Interface;
-using AutoRest.Services.Contracts.ModelsRequest;
 
 namespace AutoRest.Api.Controllers
 {
@@ -21,7 +19,7 @@ namespace AutoRest.Api.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService employeeService;
-        //private readonly IApiValidatorService validatorService;
+        private readonly IApiValidatorService validatorService;
         private readonly IMapper mapper;
 
         /// <summary>
@@ -65,7 +63,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Создаёт нового рабочего
+        /// Создаёт нового работника
         /// </summary>
         [HttpPost]
         [ApiOk(typeof(EmployeeResponse))]
@@ -80,7 +78,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Редактирует имеющищегося рабочего
+        /// Редактирует имеющегося работника
         /// </summary>
         [HttpPut]
         [ApiOk(typeof(EmployeeResponse))]
@@ -95,7 +93,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Удаляет имеющийегося рабочего по id
+        /// Удаляет имеющегося работника по id
         /// </summary>
         [HttpDelete("{id}")]
         [ApiOk]

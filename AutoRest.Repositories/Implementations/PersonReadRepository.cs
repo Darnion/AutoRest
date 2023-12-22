@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using AutoRest.Common.Entity.InterfaceDB;
+﻿using AutoRest.Common.Entity.InterfaceDB;
 using AutoRest.Common.Entity.Repositories;
 using AutoRest.Context.Contracts.Models;
 using AutoRest.Repositories.Contracts;
-using AutoRest.Context.Contracts.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace AutoRest.Repositories.Implementations
 {
@@ -25,7 +24,6 @@ namespace AutoRest.Repositories.Implementations
 
         Task<Person?> IPersonReadRepository.GetByIdAsync(Guid id, CancellationToken cancellationToken)
             => reader.Read<Person>()
-                .NotDeletedAt()
                 .ById(id)
                 .FirstOrDefaultAsync(cancellationToken);
 
@@ -38,16 +36,18 @@ namespace AutoRest.Repositories.Implementations
                 .ThenBy(x => x.Patronymic)
                 .ToDictionaryAsync(key => key.Id, cancellation);
 
-        Task<bool> IPersonReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+        Task<IReadOnlyCollection<Person>> IPersonReadRepository.GetAllByGroupIdAsync(Guid groupId, CancellationToken cancellationToken)
+            => reader.Read<Person>()
+                .NotDeletedAt()
+                .Where(x => x.GroupId == groupId)
+                .OrderBy(x => x.LastName)
+                .ThenBy(x => x.FirstName)
+                .ThenBy(x => x.Patronymic)
+                .ToReadOnlyCollectionAsync(cancellationToken);
+        public Task<bool> AnyByIdAsync(Guid id, CancellationToken cancellationToken)
             => reader.Read<Person>()
                 .NotDeletedAt()
                 .ById(id)
                 .AnyAsync(cancellationToken);
-
-        //Task<IReadOnlyCollection<Person>> IPersonReadRepository.GetAllByEmployeeTypeAsync(EmployeeTypes EmployeeType, CancellationToken cancellationToken)
-        //    => reader.Read<Person>()
-        //        .NotDeletedAt()
-        //        .Where(x => x.)
-        //        .AnyAsync(cancellationToken);
     }
 }

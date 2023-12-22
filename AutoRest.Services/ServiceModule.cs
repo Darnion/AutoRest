@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using AutoRest.Common;
+﻿using AutoRest.Common;
 using AutoRest.Services.Automappers;
 using AutoRest.Shared;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AutoRest.Services
 {

@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using AutoRest.Common.Entity.EntityInterface;
+﻿using AutoRest.Common.Entity.EntityInterface;
 using AutoRest.Context.Contracts.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AutoRest.Context.Configuration
 {

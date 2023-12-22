@@ -22,20 +22,38 @@ namespace AutoRest.Api.Validators.OrderItem
                .NotEmpty()
                .WithMessage("Id не должен быть пустым или null");
 
-            RuleFor(x => x.EmployeeWaiterFIO)
+            RuleFor(x => x.EmployeeWaiterId)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Имя официанта не должно быть пустым или null");
+                .WithMessage("Имя официанта не должно быть пустым или null")
+                .MustAsync(async (id, CancellationToken) =>
+                {
+                    var waiterExists = await employeeReadRepository.AnyByIdAsync(id, CancellationToken);
+                    return waiterExists;
+                })
+                .WithMessage("Такого официанта не существует!");
 
-            RuleFor(x => x.TableNumber)
+            RuleFor(x => x.TableId)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Номер столика не должен быть пустым или null");
+                .WithMessage("Столик не должен быть пустым или null")
+                .MustAsync(async (id, CancellationToken) =>
+                {
+                    var tableExists = await tableReadRepository.AnyByIdAsync(id, CancellationToken);
+                    return tableExists;
+                })
+                .WithMessage("Такого столика не существует!");
 
-            RuleFor(x => x.MenuItem)
+            RuleFor(x => x.MenuItemId)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Заказанная позиция не должна быть пустой или null");
+                .WithMessage("Заказанная позиция не должна быть пустой или null")
+                .MustAsync(async (id, CancellationToken) =>
+                {
+                    var menuItemExists = await menuItemReadRepository.AnyByIdAsync(id, CancellationToken);
+                    return menuItemExists;
+                })
+                .WithMessage("Такой позиции не существует!");
         }
     }
 }

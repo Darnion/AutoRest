@@ -78,7 +78,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Редактирует имеющуюся карту лояльности
+        /// Редактирует существующую карту лояльности
         /// </summary>
         [HttpPut]
         [ApiOk(typeof(LoyaltyCardResponse))]
@@ -93,7 +93,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Удаляет имеющуюся карту лояльности по id
+        /// Удаляет существующую карту лояльности по id
         /// </summary>
         [HttpDelete("{id}")]
         [ApiOk]

@@ -52,11 +52,6 @@
         public string OrderStatus { get; set; }
 
         /// <summary>
-        /// Время закрытия заказа
-        /// </summary>
-        public DateTimeOffset? OrderClosedTime { get; set; }
-
-        /// <summary>
         /// Кассир
         /// </summary>
         public string EmployeeCashierFIO { get; set; }

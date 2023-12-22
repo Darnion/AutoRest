@@ -46,5 +46,11 @@ namespace AutoRest.Repositories.Implementations
                     x.Person,
                 })
                 .ToDictionaryAsync(key => key.Id, val => val.Person, cancellation);
+
+        Task<bool> IEmployeeReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+            => reader.Read<Employee>()
+                .NotDeletedAt()
+                .ById(id)
+                .AnyAsync(cancellationToken);
     }
 }

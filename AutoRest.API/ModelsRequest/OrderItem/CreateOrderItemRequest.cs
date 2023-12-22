@@ -1,30 +1,37 @@
-﻿namespace AutoRest.Api.ModelsRequest.OrderItem
+﻿using AutoRest.Services.Contracts.Models;
+
+namespace AutoRest.Api.ModelsRequest.OrderItem
 {
     public class CreateOrderItemRequest
     {
         /// <summary>
-        /// Официант
+        /// <inheritdoc cref="EmployeeModel"/>
         /// </summary>
-        public string EmployeeWaiterFIO { get; set; }
+        public Guid EmployeeWaiterId { get; set; }
 
         /// <summary>
-        /// Номер столика
+        /// <inheritdoc cref="TableModel"/>
         /// </summary>
-        public string TableNumber { get; set; }
+        public Guid TableId { get; set; }
 
         /// <summary>
-        /// Позиция в меню
+        /// <inheritdoc cref="MenuItemModel"/>
         /// </summary>
-        public string MenuItem { get; set; }
+        public Guid MenuItemId { get; set; }
+
+        /// <summary>
+        /// <inheritdoc cref="LoyaltyCardModel"/>
+        /// </summary>
+        public Guid? LoyaltyCardId { get; set; } = Guid.Empty;
 
         /// <summary>
         /// Статус заказа
         /// </summary>
-        public bool OrderStatus { get; set; }
+        public bool OrderStatus { get; set; } = false;
 
         /// <summary>
-        /// Кассир
+        /// <inheritdoc cref="EmployeeModel"/>
         /// </summary>
-        public string EmployeeCashierFIO { get; set; }
+        public Guid? EmployeeCashierId { get; set; } = Guid.Empty;
     }
 }

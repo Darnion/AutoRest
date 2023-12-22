@@ -35,7 +35,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Получить список всех сотрудников
+        /// Получить список всех работников
         /// </summary>
         [HttpGet]
         [ApiOk(typeof(IEnumerable<EmployeeResponse>))]
@@ -46,7 +46,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Получает сотрудника по идентификатору
+        /// Получает работника по идентификатору
         /// </summary>
         [HttpGet("{id:guid}")]
         [ApiOk(typeof(EmployeeResponse))]
@@ -78,7 +78,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Редактирует имеющегося работника
+        /// Редактирует существующего работника
         /// </summary>
         [HttpPut]
         [ApiOk(typeof(EmployeeResponse))]
@@ -93,7 +93,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Удаляет имеющегося работника по id
+        /// Удаляет существующего работника по id
         /// </summary>
         [HttpDelete("{id}")]
         [ApiOk]

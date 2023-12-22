@@ -11,6 +11,7 @@ using AutoRest.Api.ModelsRequest.OrderItem;
 using AutoRest.Services.Contracts.Models;
 using AutoRest.Services.Contracts.Models.Enums;
 using AutoRest.Services.Contracts.ModelsRequest;
+using Microsoft.OpenApi.Extensions;
 
 namespace AutoRest.Api.Infrastructures
 {
@@ -31,37 +32,50 @@ namespace AutoRest.Api.Infrastructures
                 .ConvertUsingEnumMapping(opt => opt.MapByName())
                 .ReverseMap();
 
+            CreateMap<MenuItemRequest, MenuItemRequestModel>(MemberList.Destination);
+            CreateMap<CreateMenuItemRequest, MenuItemRequestModel>(MemberList.Destination);
             CreateMap<MenuItemModel, MenuItemResponse>(MemberList.Destination);
-            CreateMap<MenuItemRequest, MenuItemModel>(MemberList.Destination);
 
-            CreateMap<CreateLoyaltyCardRequest, LoyaltyCardRequestModel>(MemberList.Destination);
             CreateMap<LoyaltyCardRequest, LoyaltyCardRequestModel>(MemberList.Destination);
+            CreateMap<CreateLoyaltyCardRequest, LoyaltyCardRequestModel>(MemberList.Destination);
+            CreateMap<LoyaltyCardModel, LoyaltyCardResponse>(MemberList.Destination);
 
+            CreateMap<EmployeeRequest, EmployeeRequestModel>(MemberList.Destination);
+            CreateMap<CreateEmployeeRequest, EmployeeRequestModel>(MemberList.Destination);
             CreateMap<EmployeeModel, EmployeeResponse>(MemberList.Destination)
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.Person != null
                     ? $"{x.Person.LastName} {x.Person.FirstName} {x.Person.Patronymic}"
                     : string.Empty))
                 .ForMember(x => x.EmployeeType, opt => opt.MapFrom(x => x.EmployeeType));
 
-            CreateMap<CreateEmployeeRequest, EmployeeRequestModel>(MemberList.Destination);
-            CreateMap<EmployeeRequest, EmployeeRequestModel>(MemberList.Destination);
-
-            CreateMap<PersonModel, PersonResponse>(MemberList.Destination);
-            CreateMap<CreatePersonRequest, PersonRequestModel>(MemberList.Destination);
             CreateMap<PersonRequest, PersonRequestModel>(MemberList.Destination);
+            CreateMap<CreatePersonRequest, PersonRequestModel>(MemberList.Destination);
+            CreateMap<PersonModel, PersonResponse>(MemberList.Destination);
 
-            CreateMap<TableModel, TableResponse>(MemberList.Destination);
-            CreateMap<CreateTableRequest, TableRequestModel>(MemberList.Destination);
             CreateMap<TableRequest, TableRequestModel>(MemberList.Destination);
+            CreateMap<CreateTableRequest, TableRequestModel>(MemberList.Destination);
+            CreateMap<TableModel, TableResponse>(MemberList.Destination);
 
-            //CreateMap<OrderItemModel, OrderItemResponse>(MemberList.Destination)
-            //    .ForMember(x => x.NameMenuItem, opt => opt.MapFrom(x => x.MenuItem!.Name))
-            //    .ForMember(x => x.NameTable, opt => opt.MapFrom(x => x.Table!.Name))
-            //    .ForMember(x => x.TeacherName, opt => opt.MapFrom(x => $"{x.Teacher!.LastName} {x.Teacher.FirstName} {x.Teacher.Patronymic}"))
-            //    .ForMember(x => x.Phone, opt => opt.MapFrom(x => x.Teacher!.Phone));
-            CreateMap<CreateOrderItemRequest, OrderItemRequestModel>(MemberList.Destination);
             CreateMap<OrderItemRequest, OrderItemRequestModel>(MemberList.Destination);
-
+            CreateMap<CreateOrderItemRequest, OrderItemRequestModel>(MemberList.Destination);
+            CreateMap<OrderItemModel, OrderItemResponse>(MemberList.Destination)
+                .ForMember(x => x.OrderAcceptTime, opt => opt.MapFrom(x => x.CreatedAt))
+                .ForMember(x => x.EmployeeWaiterFIO, opt => opt.MapFrom(x => $"{x.EmployeeWaiter!.LastName} {x.EmployeeWaiter.FirstName} {x.EmployeeWaiter.Patronymic}"))
+                .ForMember(x => x.TableNumber, opt => opt.MapFrom(x => x.Table.Number))
+                .ForMember(x => x.MenuItem, opt => opt.MapFrom(x => x.MenuItem.Title))
+                .ForMember(x => x.LoyaltyCardNumber, opt => opt.MapFrom(x => x.LoyaltyCard != null
+                                                                        ? x.LoyaltyCard.Number
+                                                                        : null))
+                .ForMember(x => x.LoyaltyCardType, opt => opt.MapFrom(x => x.LoyaltyCard != null
+                                                                        ? x.LoyaltyCard.LoyaltyCardType.GetDisplayName()
+                                                                        : null))
+                .ForMember(x => x.OrderCost, opt => opt.MapFrom(x => x.LoyaltyCard != null
+                                                                        ? x.MenuItem.Cost * (1 - (((int)(x.LoyaltyCard.LoyaltyCardType)) + 1) * 0.05M)
+                                                                        : x.MenuItem.Cost))
+                .ForMember(x => x.OrderStatus, opt => opt.MapFrom(x => x.OrderStatus))
+                .ForMember(x => x.MenuItem, opt => opt.MapFrom(x => x.MenuItem.Title))
+                .ForMember(x => x.EmployeeCashierFIO, opt => opt.MapFrom(x => $"{x.EmployeeCashier!.LastName} {x.EmployeeCashier.FirstName} {x.EmployeeCashier.Patronymic}"))
+                ;
 
         }
     }

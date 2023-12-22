@@ -21,5 +21,10 @@ namespace AutoRest.Repositories.Contracts
         /// Получить список <see cref="Table"/> по идентификаторам
         /// </summary>
         Task<Dictionary<Guid, Table>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellation);
+
+        /// <summary>
+        /// Узнать существует ли <see cref="Table"/> с таким ид
+        /// </summary>
+        Task<bool> AnyByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

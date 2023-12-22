@@ -5,12 +5,12 @@
         /// <summary>
         /// Фамилия
         /// </summary>
-        public string LastName { get; set; } = string.Empty;
+        public string LastName { get; set; }
 
         /// <summary>
         /// Имя
         /// </summary>
-        public string FirstName { get; set; } = string.Empty;
+        public string FirstName { get; set; }
 
         /// <summary>
         /// Отчество

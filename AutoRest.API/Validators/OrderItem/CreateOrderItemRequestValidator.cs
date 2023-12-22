@@ -1,4 +1,5 @@
 ﻿using AutoRest.Api.ModelsRequest.OrderItem;
+using AutoRest.Repositories.Contracts;
 using FluentValidation;
 
 namespace AutoRest.Api.Validators.OrderItem
@@ -11,7 +12,10 @@ namespace AutoRest.Api.Validators.OrderItem
         /// <summary>
         /// 
         /// </summary>
-        public CreateOrderItemRequestValidator()
+        public CreateOrderItemRequestValidator(IEmployeeReadRepository employeeReadRepository,
+                                        ILoyaltyCardReadRepository loyaltyCardReadRepository,
+                                        IMenuItemReadRepository menuItemReadRepository,
+                                        ITableReadRepository tableReadRepository)
         {
             RuleFor(x => x.EmployeeWaiterFIO)
                 .NotNull()

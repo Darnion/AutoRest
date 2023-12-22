@@ -13,7 +13,6 @@ namespace AutoRest.Api.Validators.Person
         /// </summary>
         public CreatePersonRequestValidator()
         {
-
             RuleFor(x => x.LastName)
                 .NotNull()
                 .NotEmpty()

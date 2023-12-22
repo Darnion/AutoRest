@@ -21,6 +21,11 @@ namespace AutoRest.Context.Configuration
 
             builder.HasIndex(x => x.EmployeeType)
                 .HasDatabaseName($"IX_{nameof(Employee)}_{nameof(Employee.EmployeeType)}");
+
+            builder.HasIndex(x => x.PersonId)
+                .IsUnique()
+                .HasFilter($"{nameof(Employee.DeletedAt)} is null")
+                .HasDatabaseName($"IX_{nameof(Employee)}_{nameof(Employee.PersonId)}");
         }
     }
 }

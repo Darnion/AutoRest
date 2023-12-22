@@ -18,25 +18,26 @@ namespace AutoRest.Api.Infrastructures.Validator
         public ApiValidatorService(IPersonReadRepository personReadRepository,
             IEmployeeReadRepository employeeReadRepository,
             ILoyaltyCardReadRepository loyaltycardReadRepository,
-            ITableReadRepository tableReadRepository)
+            ITableReadRepository tableReadRepository,
+            IMenuItemReadRepository menuItemReadRepository)
         {
             Register<CreateLoyaltyCardRequestValidator>();
             Register<LoyaltyCardRequestValidator>();
 
-            Register<CreateMenuItemRequestValidator>(personReadRepository);
-            Register<MenuItemRequestValidator>(personReadRepository);
+            Register<CreateMenuItemRequestValidator>();
+            Register<MenuItemRequestValidator>();
 
             Register<CreateEmployeeRequestValidator>(personReadRepository);
             Register<EmployeeRequestValidator>(personReadRepository);
 
-            Register<CreateTableRequestValidator>(employeeReadRepository);
-            Register<TableRequestValidator>(employeeReadRepository);
+            Register<CreateTableRequestValidator>();
+            Register<TableRequestValidator>();
 
             Register<CreatePersonRequestValidator>();
             Register<PersonRequestValidator>();
 
-            Register<CreateOrderItemRequestValidator>(employeeReadRepository, loyaltycardReadRepository, tableReadRepository);
-            Register<OrderItemRequestValidator>(employeeReadRepository, loyaltycardReadRepository, tableReadRepository);
+            Register<CreateOrderItemRequestValidator>(employeeReadRepository, loyaltycardReadRepository, menuItemReadRepository, tableReadRepository);
+            Register<OrderItemRequestValidator>(employeeReadRepository, loyaltycardReadRepository, menuItemReadRepository, tableReadRepository);
         }
 
         ///<summary>

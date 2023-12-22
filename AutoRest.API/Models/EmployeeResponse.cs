@@ -19,5 +19,10 @@ namespace AutoRest.Api.Models
         /// ФИО
         /// </summary>
         public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Идентификатор работника
+        /// </summary>
+        public Guid PersonId { get; set; }
     }
 }

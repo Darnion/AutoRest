@@ -29,8 +29,8 @@ namespace AutoRest.Api.Validators.Employee
                 .WithMessage("Личность не должна быть пустым или null")
                 .MustAsync(async (id, CancellationToken) =>
                 {
-                    var person = await personReadRepository.GetByIdAsync(id, CancellationToken);
-                    return person != null;
+                    var personExists = await personReadRepository.AnyByIdAsync(id, CancellationToken);
+                    return personExists;
                 })
                 .WithMessage("Такой личности не существует!");
         }

@@ -17,5 +17,6 @@ namespace AutoRest.Services.Contracts.ModelsRequest
         /// <inheritdoc cref="PersonModel"/>
         /// </summary>
         public Guid PersonId { get; set; }
+
     }
 }

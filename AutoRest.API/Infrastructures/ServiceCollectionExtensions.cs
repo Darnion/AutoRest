@@ -15,7 +15,7 @@ namespace AutoRest.Api.Infrastructures
             service.AddTransient<IDateTimeProvider, DateTimeProvider>();
             service.AddTransient<IDbWriterContext, DbWriterContext>();
             service.AddTransient<IApiValidatorService, ApiValidatorService>();
-            //service.RegisterAutoMapperProfile<ApiAutoMapperProfile>();
+            service.RegisterAutoMapperProfile<ApiAutoMapperProfile>();
 
             service.RegisterModule<ServiceModule>();
             service.RegisterModule<RepositoryModule>();

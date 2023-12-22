@@ -36,15 +36,7 @@ namespace AutoRest.Repositories.Implementations
                 .ThenBy(x => x.Patronymic)
                 .ToDictionaryAsync(key => key.Id, cancellation);
 
-        Task<IReadOnlyCollection<Person>> IPersonReadRepository.GetAllByGroupIdAsync(Guid groupId, CancellationToken cancellationToken)
-            => reader.Read<Person>()
-                .NotDeletedAt()
-                .Where(x => x.GroupId == groupId)
-                .OrderBy(x => x.LastName)
-                .ThenBy(x => x.FirstName)
-                .ThenBy(x => x.Patronymic)
-                .ToReadOnlyCollectionAsync(cancellationToken);
-        public Task<bool> AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+        Task<bool> IPersonReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
             => reader.Read<Person>()
                 .NotDeletedAt()
                 .ById(id)

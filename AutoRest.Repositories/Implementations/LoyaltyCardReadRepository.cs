@@ -16,6 +16,11 @@ namespace AutoRest.Repositories.Implementations
             this.reader = reader;
         }
 
+        Task<bool> ILoyaltyCardReadRepository.AnyByNumberAsync(string number, CancellationToken cancellationToken)
+            => reader.Read<LoyaltyCard>()
+                .NotDeletedAt()
+                .AnyAsync(x => x.Number == number, cancellationToken);
+
         Task<IReadOnlyCollection<LoyaltyCard>> ILoyaltyCardReadRepository.GetAllAsync(CancellationToken cancellationToken)
             => reader.Read<LoyaltyCard>()
                 .NotDeletedAt()

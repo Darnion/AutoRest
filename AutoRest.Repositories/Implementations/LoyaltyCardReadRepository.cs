@@ -16,6 +16,11 @@ namespace AutoRest.Repositories.Implementations
             this.reader = reader;
         }
 
+        Task<bool> ILoyaltyCardReadRepository.AnyByNumberAsync(string number, CancellationToken cancellationToken)
+            => reader.Read<LoyaltyCard>()
+                .NotDeletedAt()
+                .AnyAsync(x => x.Number == number, cancellationToken);
+
         Task<IReadOnlyCollection<LoyaltyCard>> ILoyaltyCardReadRepository.GetAllAsync(CancellationToken cancellationToken)
             => reader.Read<LoyaltyCard>()
                 .NotDeletedAt()
@@ -28,10 +33,10 @@ namespace AutoRest.Repositories.Implementations
                 .ById(id)
                 .FirstOrDefaultAsync(cancellationToken);
 
-        Task<Dictionary<Guid, LoyaltyCard>> ILoyaltyCardReadRepository.GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellation)
+        Task<Dictionary<Guid, LoyaltyCard>> ILoyaltyCardReadRepository.GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
             => reader.Read<LoyaltyCard>()
                 .NotDeletedAt()
                 .ByIds(ids)
-                .ToDictionaryAsync(key => key.Id, cancellation);
+                .ToDictionaryAsync(key => key.Id, cancellationToken);
     }
 }

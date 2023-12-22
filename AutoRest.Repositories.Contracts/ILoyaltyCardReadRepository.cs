@@ -20,7 +20,7 @@ namespace AutoRest.Repositories.Contracts
         /// <summary>
         /// Получить список <see cref="LoyaltyCard"/> по идентификаторам
         /// </summary>
-        Task<Dictionary<Guid, LoyaltyCard>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellation);
+        Task<Dictionary<Guid, LoyaltyCard>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken);
 
         /// <summary>
         /// Узнать существует ли <see cref="LoyaltyCard"/> с таким номером

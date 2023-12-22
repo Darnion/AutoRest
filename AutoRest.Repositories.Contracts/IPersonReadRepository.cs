@@ -1,4 +1,5 @@
-﻿using AutoRest.Context.Contracts.Models;
+﻿using AutoRest.Context.Contracts.Enums;
+using AutoRest.Context.Contracts.Models;
 
 namespace AutoRest.Repositories.Contracts
 {
@@ -31,7 +32,7 @@ namespace AutoRest.Repositories.Contracts
         /// <summary>
         /// Получить список всех <see cref="Person"/> по должности
         /// </summary>
-        Task<IReadOnlyCollection<Person>> GetAllByEmployeeTypeAsync(Guid EmployeeType, CancellationToken cancellationToken);
+        //Task<IReadOnlyCollection<Person>> GetAllByEmployeeTypeAsync(EmployeeTypes EmployeeType, CancellationToken cancellationToken);
     }
 
 }

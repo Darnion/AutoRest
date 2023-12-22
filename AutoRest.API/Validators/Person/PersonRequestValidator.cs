@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using TimeTable203.Api.ModelsRequest.Person;
+using AutoRest.Api.ModelsRequest.Person;
 
-namespace TimeTable203.Api.Validators.Person
+namespace AutoRest.Api.Validators.Person
 {
     /// <summary>
     /// 
@@ -27,18 +27,6 @@ namespace TimeTable203.Api.Validators.Person
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Имя не должно быть пустым или null");
-
-            RuleFor(x => x.Email)
-               .NotNull()
-               .NotEmpty()
-               .WithMessage("Почта не должна быть пустой или null")
-               .EmailAddress()
-               .WithMessage("Требуется действительная почта!");
-
-            RuleFor(x => x.Phone)
-                .NotNull()
-                .NotEmpty()
-                .WithMessage("Телефон не должна быть пустой или null");
         }
     }
 }

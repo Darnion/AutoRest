@@ -1,7 +1,7 @@
 ﻿using AutoRest.Services.Contracts.Models;
 using AutoRest.Services.Contracts.ModelsRequest;
 
-namespace AutoRest.Services.Contracts.Interface
+namespace AutoRest.Services.Contracts.Interfaces
 {
     public interface IPersonService
     {
@@ -19,11 +19,6 @@ namespace AutoRest.Services.Contracts.Interface
         /// Добавляет новую персону
         /// </summary>
         Task<PersonModel> AddAsync(PersonRequestModel person, CancellationToken cancellationToken);
-
-        /// <summary>
-        /// Изменяет у персоны группу
-        /// </summary>
-        Task<PersonModel> UpdateGroupAsync(Guid id, Guid groupId, CancellationToken cancellationToken);
 
         /// <summary>
         /// Редактирует существующую персону

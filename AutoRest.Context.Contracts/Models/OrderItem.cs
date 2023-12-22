@@ -13,7 +13,7 @@
         /// <summary>
         /// Делаем связь один ко многим
         /// </summary>
-        public Employee Employee { get; set; }
+        public Employee? EmployeeWaiter { get; set; }
 
         /// <summary>
         /// Идентификатор столика
@@ -38,12 +38,12 @@
         /// <summary>
         /// Идентификатор карты лояльности
         /// </summary>
-        public Guid LoyaltyCardId { get; set; }
+        public Guid? LoyaltyCardId { get; set; }
 
         /// <summary>
         /// Делаем связь один ко многим
         /// </summary>
-        public LoyaltyCard LoyaltyCard { get; set; }
+        public LoyaltyCard? LoyaltyCard { get; set; }
 
         /// <summary>
         /// Статус заказа
@@ -54,6 +54,11 @@
         /// Идентификатор кассира
         /// </summary>
         public Guid? EmployeeCashierId { get; set; }
+
+        /// <summary>
+        /// Делаем связь один ко многим
+        /// </summary>
+        public Employee? EmployeeCashier { get; set; }
 
     }
 }

@@ -1,4 +1,4 @@
-﻿using AutoRest.Services.Contracts.Enums;
+﻿using AutoRest.Services.Contracts.Models.Enums;
 
 namespace AutoRest.Services.Contracts.Models
 {

@@ -1,7 +1,7 @@
 ﻿using AutoRest.Services.Contracts.Models;
 using AutoRest.Services.Contracts.ModelsRequest;
 
-namespace AutoRest.Services.Contracts.Interface
+namespace AutoRest.Services.Contracts.Interfaces
 {
     public interface IEmployeeService
     {
@@ -16,17 +16,17 @@ namespace AutoRest.Services.Contracts.Interface
         Task<EmployeeModel?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Добавляет нового учителя
+        /// Добавляет нового работника
         /// </summary>
         Task<EmployeeModel> AddAsync(EmployeeRequestModel request, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Редактирует существующего учителя
+        /// Редактирует существующего работника
         /// </summary>
         Task<EmployeeModel> EditAsync(EmployeeRequestModel source, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Удаляет существующего учителя
+        /// Удаляет существующего работника
         /// </summary>
         Task DeleteAsync(Guid id, CancellationToken cancellationToken);
     }

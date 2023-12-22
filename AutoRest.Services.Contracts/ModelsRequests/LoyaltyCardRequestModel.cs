@@ -1,4 +1,4 @@
-﻿using AutoRest.Services.Contracts.Enums;
+﻿using AutoRest.Context.Contracts.Enums;
 
 namespace AutoRest.Services.Contracts.ModelsRequest
 {
@@ -9,8 +9,8 @@ namespace AutoRest.Services.Contracts.ModelsRequest
         /// </summary>
         public Guid Id { get; set; }
 
-        /// <inheritdoc cref="LoyaltyCardTypesModel"/>
-        public LoyaltyCardTypesModel LoyaltyCardType { get; set; }
+        /// <inheritdoc cref="LoyaltyCardTypes"/>
+        public LoyaltyCardTypes LoyaltyCardType { get; set; }
 
         /// <summary>
         /// Номер

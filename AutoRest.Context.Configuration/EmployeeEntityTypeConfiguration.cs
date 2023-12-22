@@ -15,7 +15,7 @@ namespace AutoRest.Context.Configuration
 
             builder
                .HasMany(x => x.OrderItem)
-               .WithOne(x => x.Employee)
+               .WithOne(x => x.EmployeeWaiter)
                .HasForeignKey(x => x.EmployeeWaiterId)
                .HasForeignKey(x => x.EmployeeCashierId);
 

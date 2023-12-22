@@ -28,6 +28,7 @@ namespace AutoRest.Repositories.Implementations
 
         Task<OrderItem?> IOrderItemReadRepository.GetByIdAsync(Guid id, CancellationToken cancellationToken)
             => reader.Read<OrderItem>()
+                .NotDeletedAt()
                 .ById(id)
                 .FirstOrDefaultAsync(cancellationToken);
     }

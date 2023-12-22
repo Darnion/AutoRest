@@ -1,4 +1,4 @@
-﻿using AutoRest.Services.Contracts.Enums;
+﻿using AutoRest.Services.Contracts.Models.Enums;
 
 namespace AutoRest.Services.Contracts.Models
 {
@@ -18,6 +18,6 @@ namespace AutoRest.Services.Contracts.Models
         /// <summary>
         /// <inheritdoc cref="PersonModel"/>
         /// </summary>
-        public PersonModel? Person { get; set; }
+        public PersonModel Person { get; set; }
     }
 }

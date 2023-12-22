@@ -11,19 +11,19 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// <inheritdoc cref="EmployeeModel"/>
+        /// <inheritdoc cref="PersonModel"/>
         /// </summary>
-        public EmployeeModel? EmployeeWaiter { get; set; }
+        public PersonModel EmployeeWaiter { get; set; }
 
         /// <summary>
         /// <inheritdoc cref="TableModel"/>
         /// </summary>
-        public TableModel? Table { get; set; }
+        public TableModel Table { get; set; }
 
         /// <summary>
         /// <inheritdoc cref="MenuItemModel"/>
         /// </summary>
-        public MenuItemModel? MenuItem { get; set; }
+        public MenuItemModel MenuItem { get; set; }
 
         /// <summary>
         /// <inheritdoc cref="LoyaltyCardModel"/>
@@ -36,8 +36,8 @@
         public bool OrderStatus { get; set; } = false;
 
         /// <summary>
-        /// <inheritdoc cref="EmployeeModel"/>
+        /// <inheritdoc cref="PersonModel"/>
         /// </summary>
-        public EmployeeModel? EmployeeCashier { get; set; }
+        public PersonModel? EmployeeCashier { get; set; }
     }
 }

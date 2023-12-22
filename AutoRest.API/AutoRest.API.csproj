@@ -21,14 +21,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AutoRest.Common\AutoRest.Common.csproj" />
     <ProjectReference Include="..\AutoRest.Context\AutoRest.Context.csproj" />
     <ProjectReference Include="..\AutoRest.Repositories\AutoRest.Repositories.csproj" />
     <ProjectReference Include="..\AutoRest.Services\AutoRest.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validators\MenuItem\" />
   </ItemGroup>
 
 </Project>

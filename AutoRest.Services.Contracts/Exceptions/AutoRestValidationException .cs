@@ -5,7 +5,7 @@ namespace AutoRest.Services.Contracts.Exceptions
     /// <summary>
     /// Ошибки валидации
     /// </summary>
-    public class TimeTableValidationException : AutoRestException
+    public class AutoRestValidationException : AutoRestException
     {
         /// <summary>
         /// Ошибки
@@ -15,7 +15,7 @@ namespace AutoRest.Services.Contracts.Exceptions
         /// <summary>
         /// Инициализирует новый экземпляр <see cref="AdministrationValidationException"/>
         /// </summary>
-        public TimeTableValidationException(IEnumerable<InvalidateItemModel> errors)
+        public AutoRestValidationException(IEnumerable<InvalidateItemModel> errors)
         {
             Errors = errors;
         }

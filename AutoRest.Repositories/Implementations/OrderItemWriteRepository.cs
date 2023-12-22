@@ -1,12 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoRest.Common.Entity.InterfaceDB;
+using AutoRest.Context.Contracts.Models;
+using AutoRest.Repositories.Contracts;
 
 namespace AutoRest.Repositories.Implementations
 {
-    internal class OrderItemWriteRepository
+    /// <inheritdoc cref="IOrderItemWriteRepository"/>
+    public class OrderItemWriteRepository : BaseWriteRepository<OrderItem>,
+        IOrderItemWriteRepository,
+        IRepositoryAnchor
     {
+        /// <summary>
+        /// Инициализирует новый экземпляр <see cref="OrderItemWriteRepository"/>
+        /// </summary>
+        public OrderItemWriteRepository(IDbWriterContext writerContext)
+            : base(writerContext)
+        {
+        }
     }
 }

@@ -1,6 +1,6 @@
-﻿namespace AutoRest.Api.ModelsRequest.Person
+﻿namespace AutoRest.Api.ModelsRequest.MenuItem
 {
-    public class PersonRequest : CreatePersonRequest
+    public class MenuItemRequest : CreateMenuItemRequest
     {
         /// <summary>
         /// Идентификатор

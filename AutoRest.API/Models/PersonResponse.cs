@@ -1,11 +1,10 @@
-﻿namespace TimeTable203.Api.Models
+﻿namespace AutoRest.Api.Models
 {
     /// <summary>
-    /// Модель ответа сущность участника
+    /// Модель ответа сущность личности
     /// </summary>
     public class PersonResponse
     {
-
         /// <summary>
         /// Идентификатор
         /// </summary>
@@ -25,16 +24,5 @@
         /// Отчество
         /// </summary>
         public string Patronymic { get; set; } = string.Empty;
-
-
-        /// <summary>
-        /// Адрес электронной почты
-        /// </summary>
-        public string Email { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Телефон
-        /// </summary>
-        public string Phone { get; set; } = string.Empty;
     }
 }

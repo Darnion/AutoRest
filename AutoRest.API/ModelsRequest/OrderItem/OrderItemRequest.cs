@@ -1,6 +1,6 @@
-﻿namespace AutoRest.Api.ModelsRequest.Person
+﻿namespace AutoRest.Api.ModelsRequest.OrderItem
 {
-    public class PersonRequest : CreatePersonRequest
+    public class OrderItemRequest : CreateOrderItemRequest
     {
         /// <summary>
         /// Идентификатор

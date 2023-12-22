@@ -6,7 +6,6 @@ namespace AutoRest.Api.Models
     /// Модель ответа сущности работников
     /// </summary>
     public class EmployeeResponse
-
     {
         /// <summary>
         /// Идентификатор
@@ -20,10 +19,5 @@ namespace AutoRest.Api.Models
         /// ФИО
         /// </summary>
         public string Name { get; set; } = string.Empty;
-
-        /// <summary>
-        /// Мобильный телефон
-        /// </summary>
-        public string MobilePhone { get; set; } = string.Empty;
     }
 }

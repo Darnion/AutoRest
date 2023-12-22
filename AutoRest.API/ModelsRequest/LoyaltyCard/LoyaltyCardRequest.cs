@@ -1,6 +1,6 @@
-﻿namespace AutoRest.Api.ModelsRequest.Person
+﻿namespace AutoRest.Api.ModelsRequest.LoyaltyCard
 {
-    public class PersonRequest : CreatePersonRequest
+    public class LoyaltyCardRequest : CreateLoyaltyCardRequest
     {
         /// <summary>
         /// Идентификатор

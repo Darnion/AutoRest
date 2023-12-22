@@ -6,7 +6,7 @@ namespace AutoRest.Api.ModelsRequest.Employee
     public class CreateEmployeeRequest
     {
         /// <inheritdoc cref="EmployeeTypesResponse"/>
-        public EmployeeTypesResponse EmployeeType { get; set; } = EmployeeTypesResponse.Student;
+        public EmployeeTypesResponse EmployeeType { get; set; }
 
         /// <summary>
         /// <inheritdoc cref="PersonModel"/>

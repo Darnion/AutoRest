@@ -1,6 +1,6 @@
-﻿namespace AutoRest.Api.ModelsRequest.Person
+﻿namespace AutoRest.Api.ModelsRequest.Table
 {
-    public class PersonRequest : CreatePersonRequest
+    public class TableRequest : CreateTableRequest
     {
         /// <summary>
         /// Идентификатор

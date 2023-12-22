@@ -32,5 +32,11 @@ namespace AutoRest.Repositories.Implementations
                 .NotDeletedAt()
                 .ByIds(ids)
                 .ToDictionaryAsync(key => key.Id, cancellation);
+
+        Task<bool> ITableReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+            => reader.Read<Table>()
+                .NotDeletedAt()
+                .ById(id)
+                .AnyAsync(cancellationToken);
     }
 }

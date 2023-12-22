@@ -42,9 +42,9 @@ namespace AutoRest.Services.Implementations
             this.mapper = mapper;
         }
 
-        async Task<IEnumerable<OrderItemModel>> IOrderItemService.GetAllAsync(DateTimeOffset targetDate, CancellationToken cancellationToken)
+        async Task<IEnumerable<OrderItemModel>> IOrderItemService.GetAllAsync( CancellationToken cancellationToken)
         {
-            var orderItems = await orderItemReadRepository.GetAllByDateAsync(targetDate.Date, targetDate.Date.AddDays(1).AddMilliseconds(-1), cancellationToken);
+            var orderItems = await orderItemReadRepository.GetAllAsync(cancellationToken);
 
             var employeeWaiterIds = orderItems.Select(x => x.EmployeeWaiterId).Distinct();
             var tableIds = orderItems.Select(x => x.TableId).Distinct();
@@ -81,24 +81,24 @@ namespace AutoRest.Services.Implementations
                     continue;
                 }
 
-                if (orderItem.LoyaltyCardId == null ||
-                    !loyaltyCardDictionary.TryGetValue(orderItem.LoyaltyCardId.Value, out var loyaltyCard))
-                {
-                    continue;
-                }
-
-                if (orderItem.EmployeeCashierId == null ||
-                    !employeeCashierDictionary.TryGetValue(orderItem.EmployeeCashierId.Value, out var employeeCashier))
-                {
-                    continue;
-                }
-
                 var order = mapper.Map<OrderItemModel>(orderItem);
+
+                if (orderItem.LoyaltyCardId.HasValue)
+                {
+                    loyaltyCardDictionary.TryGetValue(orderItem.LoyaltyCardId.Value, out var loyaltyCard);
+                    order.LoyaltyCard = mapper.Map<LoyaltyCardModel>(loyaltyCard);
+
+                }
+
+                if (orderItem.EmployeeCashierId.HasValue)
+                {
+                    employeeCashierDictionary.TryGetValue(orderItem.EmployeeCashierId.Value, out var employeeCashier);
+                    order.EmployeeCashier = mapper.Map<PersonModel>(employeeCashier);
+                }
+
                 order.EmployeeWaiter = mapper.Map<PersonModel>(employeeWaiter);
                 order.Table = mapper.Map<TableModel>(table);
                 order.MenuItem = mapper.Map<MenuItemModel>(menuItem);
-                order.LoyaltyCard = mapper.Map<LoyaltyCardModel>(loyaltyCard);
-                order.EmployeeCashier = mapper.Map<PersonModel>(employeeCashier);
 
 
                 listOrderItemModel.Add(order);
@@ -151,13 +151,21 @@ namespace AutoRest.Services.Implementations
             var item = new OrderItem
             {
                 Id = Guid.NewGuid(),
-                EmployeeWaiterId = order.EmployeeCashierId,
+                EmployeeWaiterId = order.EmployeeWaiterId,
                 TableId = order.TableId,
                 MenuItemId = order.MenuItemId,
-                LoyaltyCardId = order.LoyaltyCardId,
-                OrderStatus = order.OrderStatus,
-                EmployeeCashierId = order.EmployeeCashierId,
+                OrderStatus = order.OrderStatus
             };
+
+            if (order.LoyaltyCardId != Guid.Empty)
+            {
+                item.LoyaltyCardId = order.LoyaltyCardId;
+            }
+
+            if (order.EmployeeCashierId != Guid.Empty)
+            {
+                item.EmployeeCashierId = order.EmployeeCashierId;
+            }
 
             orderItemWriteRepository.Add(item);
             await unitOfWork.SaveChangesAsync(cancellationToken);
@@ -179,7 +187,7 @@ namespace AutoRest.Services.Implementations
             targetOrderItem.EmployeeWaiterId = employeeWaiter!.Id;
             targetOrderItem.EmployeeWaiter = employeeWaiter;
 
-            var employeeCashier = await employeeReadRepository.GetByIdAsync(source.EmployeeCashierId, cancellationToken);
+            var employeeCashier = await employeeReadRepository.GetByIdAsync(source.EmployeeCashierId.Value, cancellationToken);
             targetOrderItem.EmployeeCashierId = employeeCashier!.Id;
             targetOrderItem.EmployeeCashier = employeeCashier;
 
@@ -191,7 +199,7 @@ namespace AutoRest.Services.Implementations
             targetOrderItem.MenuItemId = menuItem!.Id;
             targetOrderItem.MenuItem = menuItem;
 
-            var loyaltyCard = await loyaltyCardReadRepository.GetByIdAsync(source.LoyaltyCardId, cancellationToken);
+            var loyaltyCard = await loyaltyCardReadRepository.GetByIdAsync(source.LoyaltyCardId.Value, cancellationToken);
             targetOrderItem.LoyaltyCardId = loyaltyCard!.Id;
             targetOrderItem.LoyaltyCard = loyaltyCard;
 

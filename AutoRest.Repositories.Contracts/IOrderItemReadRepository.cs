@@ -8,9 +8,9 @@ namespace AutoRest.Repositories.Contracts
     public interface IOrderItemReadRepository
     {
         /// <summary>
-        /// Получить список всех <see cref="OrderItem"/> входящих в период между <see langword="startDate"/> и <see langword="endDate"/> включительно
+        /// Получить список всех <see cref="OrderItem"/>
         /// </summary>
-        Task<IReadOnlyCollection<OrderItem>> GetAllByDateAsync(DateTimeOffset startDate, DateTimeOffset endDate, CancellationToken cancellationToken);
+        Task<IReadOnlyCollection<OrderItem>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="OrderItem"/> по идентификатору

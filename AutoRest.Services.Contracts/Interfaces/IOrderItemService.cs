@@ -8,7 +8,7 @@ namespace AutoRest.Services.Contracts.Interfaces
         /// <summary>
         /// Получить список всех <see cref="OrderItemModel"/>
         /// </summary>
-        Task<IEnumerable<OrderItemModel>> GetAllAsync(DateTimeOffset targetDate, CancellationToken cancellationToken);
+        Task<IEnumerable<OrderItemModel>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="OrderItemModel"/> по идентификатору

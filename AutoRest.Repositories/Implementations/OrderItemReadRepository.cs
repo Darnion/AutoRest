@@ -16,13 +16,9 @@ namespace AutoRest.Repositories.Implementations
             this.reader = reader;
         }
 
-        Task<IReadOnlyCollection<OrderItem>> IOrderItemReadRepository.GetAllByDateAsync(DateTimeOffset startDate,
-            DateTimeOffset endDate,
-            CancellationToken cancellationToken)
+        Task<IReadOnlyCollection<OrderItem>> IOrderItemReadRepository.GetAllAsync(CancellationToken cancellationToken)
             => reader.Read<OrderItem>()
                 .NotDeletedAt()
-                .Where(x => x.CreatedAt >= startDate &&
-                            x.CreatedAt <= endDate)
                 .OrderBy(x => x.CreatedAt)
                 .ToReadOnlyCollectionAsync(cancellationToken);
 

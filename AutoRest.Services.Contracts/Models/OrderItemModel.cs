@@ -11,6 +11,11 @@
         public Guid Id { get; set; }
 
         /// <summary>
+        /// Время принятия заказа
+        /// </summary>
+        public DateTimeOffset CreatedAt { get; set; }
+
+        /// <summary>
         /// <inheritdoc cref="PersonModel"/>
         /// </summary>
         public PersonModel EmployeeWaiter { get; set; }

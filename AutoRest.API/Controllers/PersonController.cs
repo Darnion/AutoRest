@@ -78,7 +78,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Редактирует имеющуюся личность
+        /// Редактирует существующую личность
         /// </summary>
         [HttpPut]
         [ApiOk(typeof(PersonResponse))]
@@ -93,7 +93,7 @@ namespace AutoRest.Api.Controllers
         }
 
         /// <summary>
-        /// Удаляет имеющуюся личность по id
+        /// Удаляет существующую личность по id
         /// </summary>
         [HttpDelete("{id}")]
         [ApiOk]

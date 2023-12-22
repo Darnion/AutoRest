@@ -27,7 +27,7 @@ namespace AutoRest.Services.Contracts.ModelsRequest
         /// <summary>
         /// <inheritdoc cref="LoyaltyCardModel"/>
         /// </summary>
-        public Guid LoyaltyCardId { get; set; }
+        public Guid? LoyaltyCardId { get; set; }
 
         /// <summary>
         /// Статус заказа
@@ -37,6 +37,6 @@ namespace AutoRest.Services.Contracts.ModelsRequest
         /// <summary>
         /// <inheritdoc cref="EmployeeModel"/>
         /// </summary>
-        public Guid EmployeeCashierId { get; set; }
+        public Guid? EmployeeCashierId { get; set; }
     }
 }

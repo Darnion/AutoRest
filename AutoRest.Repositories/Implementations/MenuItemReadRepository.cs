@@ -33,5 +33,11 @@ namespace AutoRest.Repositories.Implementations
                 .NotDeletedAt()
                 .ByIds(ids)
                 .ToDictionaryAsync(key => key.Id, cancellation);
+
+        Task<bool> IMenuItemReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+            => reader.Read<MenuItem>()
+                .NotDeletedAt()
+                .ById(id)
+                .AnyAsync(cancellationToken);
     }
 }

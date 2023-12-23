@@ -23,7 +23,7 @@ namespace AutoRest.Api.Tests.Validators
         }
 
         /// <summary>
-        /// Тест на наличие ошибок
+        /// Тест с ошибкой
         /// </summary>
         [Fact]
         public void ValidatorRequestShouldError()
@@ -39,7 +39,7 @@ namespace AutoRest.Api.Tests.Validators
         }
 
         /// <summary>
-        /// Тест на отсутствие ошибок
+        /// Тест без ошибок
         /// </summary>
         [Fact]
         public void ValidatorRequestShouldSuccess()
@@ -55,10 +55,11 @@ namespace AutoRest.Api.Tests.Validators
 
             // Assert
             result.ShouldNotHaveValidationErrorFor(x => x.Number);
+            result.ShouldNotHaveValidationErrorFor(x => x.LoyaltyCardType);
         }
 
         /// <summary>
-        /// Тест на наличие ошибок
+        /// Тест с ошибкой
         /// </summary>
         [Fact]
         public void ValidatorCreateRequestShouldError()
@@ -74,7 +75,7 @@ namespace AutoRest.Api.Tests.Validators
         }
 
         /// <summary>
-        /// Тест на отсутствие ошибок
+        /// Тест без ошибок
         /// </summary>
         [Fact]
         public void ValidatorCreateRequestShouldSuccess()
@@ -90,6 +91,7 @@ namespace AutoRest.Api.Tests.Validators
 
             // Assert
             result.ShouldNotHaveValidationErrorFor(x => x.Number);
+            result.ShouldNotHaveValidationErrorFor(x => x.LoyaltyCardType);
         }
     }
 }

@@ -1,98 +1,103 @@
-﻿//using FluentValidation.TestHelper;
-//using AutoRest.Api.ModelsRequest.Employee;
-//using AutoRest.Api.Validators.Employee;
-//using Xunit;
-//using AutoRest.Repositories.Contracts;
-//using AutoRest.Repositories.Implementations;
-//using System.Reflection.PortableExecutable;
+﻿using AutoRest.Repositories.Contracts;
+using FluentValidation.TestHelper;
+using Moq;
+using AutoRest.Api.ModelsRequest.Employee;
+using AutoRest.Api.Validators.Employee;
+using Xunit;
 
-//namespace AutoRest.Api.Tests.Validators
-//{
-//    /// <summary>
-//    /// Тесты <see cref="EmployeeRequestValidator"/>
-//    /// </summary>
-//    public class EmployeeRequestValidatorTest
-//    {
-//        private readonly CreateEmployeeRequestValidator validatorCreateRequest;
-//        private readonly EmployeeRequestValidator validatorRequest;
+namespace AutoRest.Api.Tests.Validators
+{
+    public class EmployeeRequestValidatorTest
+    {
+        private readonly CreateEmployeeRequestValidator validationCreateRequest;
+        private readonly EmployeeRequestValidator validationRequest;
 
-//        /// <summary>
-//        /// ctor
-//        /// </summary>
-//        public EmployeeRequestValidatorTest()
-//        {
-//            validatorRequest = new EmployeeRequestValidator(new PersonReadRepository(Reader));
-//            validatorCreateRequest = new CreateEmployeeRequestValidator();
-//        }
+        private readonly Mock<IPersonReadRepository> personReadRepositoryMock;
+        public EmployeeRequestValidatorTest()
+        {
+            personReadRepositoryMock = new Mock<IPersonReadRepository>();
+            validationCreateRequest = new CreateEmployeeRequestValidator(personReadRepositoryMock.Object);
+            validationRequest = new EmployeeRequestValidator(personReadRepositoryMock.Object);
+        }
 
-//        /// <summary>
-//        /// Тест на наличие ошибок
-//        /// </summary>
-//        [Fact]
-//        public void ValidatorRequestShouldError()
-//        {
-//            //Arrange
-//            var model = new EmployeeRequest();
+        /// <summary>
+        /// Тест на наличие ошибок
+        /// </summary>
+        [Fact]
+        public async void ValidatorRequestShouldError()
+        {
+            //Arrange
+            var model = new EmployeeRequest();
 
-//            // Act
-//            var result = validatorRequest.TestValidate(model);
+            //Act
+            var validation = await validationRequest.TestValidateAsync(model);
 
-//            // Assert
-//            result.ShouldHaveValidationErrorFor(x => x.Number);
-//        }
+            //Assert
+            validation.ShouldHaveValidationErrorFor(x => x.Id);
+            validation.ShouldHaveValidationErrorFor(x => x.PersonId);
+        }
 
-//        /// <summary>
-//        /// Тест на отсутствие ошибок
-//        /// </summary>
-//        [Fact]
-//        public void ValidatorRequestShouldSuccess()
-//        {
-//            //Arrange
-//            var model = new EmployeeRequest
-//            {
-//                Number = $"Name{Guid.NewGuid():N}",
-//            };
+        /// <summary>
+        /// Тест на отсутствие ошибок
+        /// </summary>
+        [Fact]
+        public async void ValidatorRequestShouldSuccess()
+        {
+            //Arrange
+            var model = new EmployeeRequest()
+            {
+                Id = Guid.NewGuid(),
+                PersonId = Guid.NewGuid()
+            };
 
-//            // Act
-//            var result = validatorRequest.TestValidate(model);
+            personReadRepositoryMock.Setup(x => x.AnyByIdAsync(model.PersonId, It.IsAny<CancellationToken>()))
+                .ReturnsAsync(true);
 
-//            // Assert
-//            result.ShouldNotHaveValidationErrorFor(x => x.Number);
-//        }
+            //Act
+            var validation = await validationRequest.TestValidateAsync(model);
 
-//        /// <summary>
-//        /// Тест на наличие ошибок
-//        /// </summary>
-//        [Fact]
-//        public void ValidatorCreateRequestShouldError()
-//        {
-//            //Arrange
-//            var model = new CreateEmployeeRequest();
+            //Assert
+            validation.ShouldNotHaveValidationErrorFor(x => x.Id);
+            validation.ShouldNotHaveValidationErrorFor(x => x.EmployeeType);
+            validation.ShouldNotHaveValidationErrorFor(x => x.PersonId);
+        }
 
-//            // Act
-//            var result = validatorCreateRequest.TestValidate(model);
+        /// <summary>
+        /// Тест на наличие ошибок
+        /// </summary>
+        [Fact]
+        public async void ValidatorCreateRequestShouldError()
+        {
+            //Arrange
+            var model = new CreateEmployeeRequest();
 
-//            // Assert
-//            result.ShouldHaveValidationErrorFor(x => x.Number);
-//        }
+            //Act
+            var validation = await validationCreateRequest.TestValidateAsync(model);
 
-//        /// <summary>
-//        /// Тест на отсутствие ошибок
-//        /// </summary>
-//        [Fact]
-//        public void ValidatorCreateRequestShouldSuccess()
-//        {
-//            //Arrange
-//            var model = new CreateEmployeeRequest
-//            {
-//                Number = $"Name{Guid.NewGuid():N}",
-//            };
+            //Assert
+            validation.ShouldHaveValidationErrorFor(x => x.PersonId);
+        }
 
-//            // Act
-//            var result = validatorCreateRequest.TestValidate(model);
+        /// <summary>
+        /// Тест на отсутствие ошибок
+        /// </summary>
+        [Fact]
+        public async void ValidatorCreateRequestShouldSuccess()
+        {
+            //Arrange
+            var model = new CreateEmployeeRequest()
+            {
+                PersonId = Guid.NewGuid(),
+            };
 
-//            // Assert
-//            result.ShouldNotHaveValidationErrorFor(x => x.Number);
-//        }
-//    }
-//}
+            personReadRepositoryMock.Setup(x => x.AnyByIdAsync(model.PersonId, It.IsAny<CancellationToken>()))
+               .ReturnsAsync(true);
+
+            //Act
+            var validation = await validationCreateRequest.TestValidateAsync(model);
+
+            //Assert
+            validation.ShouldNotHaveValidationErrorFor(x => x.PersonId);
+        }
+    }
+}

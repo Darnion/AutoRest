@@ -42,7 +42,7 @@ namespace AutoRest.Services.Implementations
             this.mapper = mapper;
         }
 
-        async Task<IEnumerable<OrderItemModel>> IOrderItemService.GetAllAsync( CancellationToken cancellationToken)
+        async Task<IEnumerable<OrderItemModel>> IOrderItemService.GetAllAsync(CancellationToken cancellationToken)
         {
             var orderItems = await orderItemReadRepository.GetAllAsync(cancellationToken);
 

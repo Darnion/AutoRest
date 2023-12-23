@@ -1,5 +1,6 @@
 ﻿using AutoRest.Common.Entity.InterfaceDB;
 using AutoRest.Common.Entity.Repositories;
+using AutoRest.Context.Contracts.Enums;
 using AutoRest.Context.Contracts.Models;
 using AutoRest.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -20,9 +21,6 @@ namespace AutoRest.Repositories.Implementations
             => reader.Read<Employee>()
                 .NotDeletedAt()
                 .OrderBy(x => x.EmployeeType)
-                .ThenBy(x => x.Person!.LastName)
-                .ThenBy(x => x.Person!.FirstName)
-                .ThenBy(x => x.Person!.Patronymic)
                 .ToReadOnlyCollectionAsync(cancellationToken);
 
         Task<Employee?> IEmployeeReadRepository.GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -52,5 +50,11 @@ namespace AutoRest.Repositories.Implementations
                 .NotDeletedAt()
                 .ById(id)
                 .AnyAsync(cancellationToken);
+
+        Task<bool> IEmployeeReadRepository.IsTypeAllowedAsync(Guid id, CancellationToken cancellationToken)
+           => reader.Read<Employee>()
+               .NotDeletedAt()
+               .ById(id)
+               .AnyAsync(x => x.EmployeeType > EmployeeTypes.Waiter, cancellationToken);
     }
 }

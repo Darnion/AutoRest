@@ -50,6 +50,14 @@ namespace AutoRest.Api.Validators.OrderItem
                     return menuItemExists;
                 })
                 .WithMessage("Такой позиции не существует!");
+
+            RuleFor(x => x.EmployeeCashierId)
+                .MustAsync(async (id, CancellationToken) =>
+                {
+                    var employeeAllowed = await employeeReadRepository.IsTypeAllowedAsync(id!.Value, CancellationToken);
+                    return !employeeAllowed;
+                })
+                 .WithMessage("Работник не соответствует уровню допуска!");
         }
     }
 }

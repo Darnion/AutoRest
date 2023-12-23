@@ -42,7 +42,7 @@ namespace AutoRest.Services.Implementations
             this.mapper = mapper;
         }
 
-        async Task<IEnumerable<OrderItemModel>> IOrderItemService.GetAllAsync( CancellationToken cancellationToken)
+        async Task<IEnumerable<OrderItemModel>> IOrderItemService.GetAllAsync(CancellationToken cancellationToken)
         {
             var orderItems = await orderItemReadRepository.GetAllAsync(cancellationToken);
 
@@ -115,14 +115,20 @@ namespace AutoRest.Services.Implementations
                 return null;
             }
 
+            var order = mapper.Map<OrderItemModel>(item);
+
             var employeeWaiter = await employeeReadRepository.GetByIdAsync(item.EmployeeWaiterId, cancellationToken);
-            var personWaiter = await personReadRepository.GetByIdAsync(employeeWaiter!.PersonId, cancellationToken);
+
+            if (employeeWaiter != null)
+            {
+                var personWaiter = await personReadRepository.GetByIdAsync(employeeWaiter!.PersonId, cancellationToken);
+
+                order.EmployeeWaiter = mapper.Map<PersonModel>(personWaiter);
+            }
+            
             var table = await tableReadRepository.GetByIdAsync(item.TableId, cancellationToken);
             var menuItem = await menuItemReadRepository.GetByIdAsync(item.MenuItemId, cancellationToken);
 
-            var order = mapper.Map<OrderItemModel>(item);
-
-            order.EmployeeWaiter = mapper.Map<PersonModel>(personWaiter);
             order.Table = mapper.Map<TableModel>(table);
             order.MenuItem = mapper.Map<MenuItemModel>(menuItem);
 
@@ -187,9 +193,12 @@ namespace AutoRest.Services.Implementations
             targetOrderItem.EmployeeWaiterId = employeeWaiter!.Id;
             targetOrderItem.EmployeeWaiter = employeeWaiter;
 
-            var employeeCashier = await employeeReadRepository.GetByIdAsync(source.EmployeeCashierId.Value, cancellationToken);
-            targetOrderItem.EmployeeCashierId = employeeCashier!.Id;
-            targetOrderItem.EmployeeCashier = employeeCashier;
+            if (source.EmployeeCashierId.HasValue)
+            {
+                var employeeCashier = await employeeReadRepository.GetByIdAsync(source.EmployeeCashierId.Value, cancellationToken);
+                targetOrderItem.EmployeeCashierId = employeeCashier!.Id;
+                targetOrderItem.EmployeeCashier = employeeCashier;
+            }
 
             var table = await tableReadRepository.GetByIdAsync(source.TableId, cancellationToken);
             targetOrderItem.TableId = table!.Id;
@@ -199,9 +208,12 @@ namespace AutoRest.Services.Implementations
             targetOrderItem.MenuItemId = menuItem!.Id;
             targetOrderItem.MenuItem = menuItem;
 
-            var loyaltyCard = await loyaltyCardReadRepository.GetByIdAsync(source.LoyaltyCardId.Value, cancellationToken);
-            targetOrderItem.LoyaltyCardId = loyaltyCard!.Id;
-            targetOrderItem.LoyaltyCard = loyaltyCard;
+            if (source.LoyaltyCardId.HasValue)
+            {
+                var loyaltyCard = await loyaltyCardReadRepository.GetByIdAsync(source.LoyaltyCardId.Value, cancellationToken);
+                targetOrderItem.LoyaltyCardId = loyaltyCard!.Id;
+                targetOrderItem.LoyaltyCard = loyaltyCard;
+            }
 
             orderItemWriteRepository.Update(targetOrderItem);
             await unitOfWork.SaveChangesAsync(cancellationToken);

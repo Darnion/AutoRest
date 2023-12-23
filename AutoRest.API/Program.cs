@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(x =>
 {
     x.Filters.Add<AutoRestExceptionFilter>();
-});
+})
+    .AddControllersAsServices();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.GetSwaggerDocument();
 
@@ -29,3 +30,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
+
+public partial class Program { }

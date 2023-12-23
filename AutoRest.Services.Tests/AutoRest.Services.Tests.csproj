@@ -19,4 +19,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AutoRest.Context.Tests\AutoRest.Context.Tests.csproj" />
+    <ProjectReference Include="..\AutoRest.Repositories\AutoRest.Repositories.csproj" />
+    <ProjectReference Include="..\AutoRest.Services\AutoRest.Services.csproj" />
+  </ItemGroup>
+
 </Project>

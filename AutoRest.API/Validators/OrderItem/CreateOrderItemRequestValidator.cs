@@ -55,7 +55,7 @@ namespace AutoRest.Api.Validators.OrderItem
                 .MustAsync(async (id, CancellationToken) =>
                 {
                     var employeeAllowed = await employeeReadRepository.IsTypeAllowedAsync(id!.Value, CancellationToken);
-                    return employeeAllowed;
+                    return !employeeAllowed;
                 })
                  .WithMessage("Работник не соответствует уровню допуска!");
         }

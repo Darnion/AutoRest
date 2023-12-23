@@ -55,6 +55,6 @@ namespace AutoRest.Repositories.Implementations
            => reader.Read<Employee>()
                .NotDeletedAt()
                .ById(id)
-               .AnyAsync(x => x.EmployeeType > EmployeeTypes.Waiter, cancellationToken);
+               .AnyAsync(x => x.EmployeeType < EmployeeTypes.Сashier, cancellationToken);
     }
 }

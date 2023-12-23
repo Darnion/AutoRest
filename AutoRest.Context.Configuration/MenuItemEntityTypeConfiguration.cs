@@ -11,7 +11,7 @@ namespace AutoRest.Context.Configuration
             builder.ToTable("MenuItems");
             builder.HasIdAsKey();
             builder.PropertyAuditConfiguration();
-            builder.Property(x => x.Title).IsRequired();
+            builder.Property(x => x.Title).IsRequired().HasMaxLength(80);
 
             builder
                .HasMany(x => x.OrderItem)

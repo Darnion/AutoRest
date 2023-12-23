@@ -11,7 +11,7 @@ namespace AutoRest.Context.Configuration
             builder.ToTable("LoyaltyCards");
             builder.HasIdAsKey();
             builder.PropertyAuditConfiguration();
-            builder.Property(x => x.Number).IsRequired();
+            builder.Property(x => x.Number).IsRequired().HasMaxLength(40);
 
             builder
                .HasMany(x => x.OrderItem)

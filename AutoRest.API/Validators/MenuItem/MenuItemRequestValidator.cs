@@ -21,7 +21,9 @@ namespace AutoRest.Api.Validators.MenuItem
             RuleFor(x => x.Title)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Название не должно быть пустым или null");
+                .WithMessage("Название не должно быть пустым или null")
+                .MaximumLength(80)
+                .WithMessage("Слишком много символов. Должно быть не более 80."); ;
 
             RuleFor(x => x.Cost)
                 .NotNull()

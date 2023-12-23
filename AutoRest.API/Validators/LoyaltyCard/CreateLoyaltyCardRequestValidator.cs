@@ -20,7 +20,9 @@ namespace AutoRest.Api.Validators.LoyaltyCard
             RuleFor(x => x.Number)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Номер карты не должен быть пустым или null");
+                .WithMessage("Номер карты не должен быть пустым или null")
+                .MaximumLength(40)
+                .WithMessage("Слишком много символов. Должно быть не более 40."); ;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace AutoRest.Api.Validators.Person
                 .NotEmpty()
                 .WithMessage("Имя не должно быть пустым или null")
                 .MaximumLength(80)
-                .WithMessage("Слишком много символов");
+                .WithMessage("Слишком много символов. Должно быть не более 80.");
 
             RuleFor(x => x.Patronymic)
                 .MaximumLength(80);

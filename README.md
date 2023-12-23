@@ -83,6 +83,9 @@
         int VIP
     }
 ```
+Пример реального бизнес сценария
+---
+![r_keeper](https://github.com/Darnion/AutoRest/assets/63425889/b4deeeb8-d092-423e-9442-e208cb8eb123)
 SQL скрипт
 ---
 ```

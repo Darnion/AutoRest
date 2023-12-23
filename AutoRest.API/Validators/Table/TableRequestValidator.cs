@@ -21,7 +21,9 @@ namespace AutoRest.Api.Validators.Table
             RuleFor(x => x.Number)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Номер столика не должен быть пустым или null");
+                .WithMessage("Номер столика не должен быть пустым или null")
+                .MaximumLength(20)
+                .WithMessage("Слишком много символов. Должно быть не более 20.");
         }
     }
 }

@@ -28,7 +28,8 @@ namespace AutoRest.Api.Validators.Person
                 .WithMessage("Слишком много символов. Должно быть не более 80.");
 
             RuleFor(x => x.Patronymic)
-                .MaximumLength(80);
+                .MaximumLength(80)
+                .WithMessage("Слишком много символов. Должно быть не более 80.");
         }
     }
 }

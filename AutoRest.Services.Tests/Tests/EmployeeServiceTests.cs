@@ -6,7 +6,6 @@ using AutoRest.Services.Implementations;
 using FluentAssertions;
 using AutoRest.Context.Tests;
 using Xunit;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace AutoRest.Services.Tests.Tests
 {

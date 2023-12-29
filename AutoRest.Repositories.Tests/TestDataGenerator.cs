@@ -28,7 +28,7 @@ namespace AutoRest.Repositories.Tests
             var item = new LoyaltyCard
             {
                 Id = Guid.NewGuid(),
-                LoyaltyCardType = LoyaltyCardTypes.StuffCard,
+                LoyaltyCardType = LoyaltyCardType.StuffCard,
                 Number = $"Number{Guid.NewGuid():N}",
                 CreatedAt = DateTimeOffset.UtcNow,
                 CreatedBy = $"CreatedBy{Guid.NewGuid():N}",

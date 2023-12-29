@@ -13,7 +13,7 @@ namespace AutoRest.Services.Contracts.Models
         public Guid Id { get; set; }
 
         /// <inheritdoc cref="LoyaltyCardTypesModel"/>
-        public LoyaltyCardTypesModel LoyaltyCardType { get; set; }
+        public LoyaltyCardTypesModel LoyaltyCardType { get; set; } = LoyaltyCardTypesModel.Bronze;
 
         /// <summary>
         /// Номер

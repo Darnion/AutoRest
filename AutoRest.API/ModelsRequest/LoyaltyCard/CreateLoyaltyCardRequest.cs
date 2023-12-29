@@ -5,7 +5,7 @@ namespace AutoRest.Api.ModelsRequest.LoyaltyCard
     public class CreateLoyaltyCardRequest
     {
         /// <inheritdoc cref="LoyaltyCardTypesResponse"/>
-        public LoyaltyCardTypesResponse LoyaltyCardType { get; set; }
+        public LoyaltyCardTypesResponse LoyaltyCardType { get; set; } = LoyaltyCardTypesResponse.Bronze;
 
         /// <summary>
         /// Номер карты лояльности

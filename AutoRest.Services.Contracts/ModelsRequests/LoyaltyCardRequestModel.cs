@@ -9,8 +9,8 @@ namespace AutoRest.Services.Contracts.ModelsRequest
         /// </summary>
         public Guid Id { get; set; }
 
-        /// <inheritdoc cref="LoyaltyCardTypes"/>
-        public LoyaltyCardTypes LoyaltyCardType { get; set; }
+        /// <inheritdoc cref="Context.Contracts.Enums.LoyaltyCardType"/>
+        public LoyaltyCardType LoyaltyCardType { get; set; }
 
         /// <summary>
         /// Номер

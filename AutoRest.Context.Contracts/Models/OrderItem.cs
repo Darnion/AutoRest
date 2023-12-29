@@ -13,7 +13,7 @@
         /// <summary>
         /// Делаем связь один ко многим
         /// </summary>
-        public Employee? EmployeeWaiter { get; set; }
+        public Employee EmployeeWaiter { get; set; }
 
         /// <summary>
         /// Идентификатор столика

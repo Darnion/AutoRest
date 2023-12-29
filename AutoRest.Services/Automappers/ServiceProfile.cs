@@ -10,7 +10,7 @@ namespace AutoRest.Services.Automappers
     {
         public ServiceProfile()
         {
-            CreateMap<LoyaltyCardTypes, LoyaltyCardTypesModel>()
+            CreateMap<LoyaltyCardType, LoyaltyCardTypesModel>()
                 .ConvertUsingEnumMapping(opt => opt.MapByName())
                 .ReverseMap();
 

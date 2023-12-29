@@ -7,8 +7,8 @@ namespace AutoRest.Context.Contracts.Models
     /// </summary>
     public class LoyaltyCard : BaseAuditEntity
     {
-        /// <inheritdoc cref="LoyaltyCardTypes"/>
-        public LoyaltyCardTypes LoyaltyCardType { get; set; } = LoyaltyCardTypes.Bronze;
+        /// <inheritdoc cref="Enums.LoyaltyCardType"/>
+        public LoyaltyCardType LoyaltyCardType { get; set; } = LoyaltyCardType.Bronze;
 
         /// <summary>
         /// Номер карты лояльности

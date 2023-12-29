@@ -42,7 +42,6 @@ namespace AutoRest.Services.Tests
             var item = new LoyaltyCard
             {
                 Id = Guid.NewGuid(),
-                LoyaltyCardType = LoyaltyCardTypes.StuffCard,
                 Number = $"Number{Guid.NewGuid():N}",
                 CreatedAt = DateTimeOffset.UtcNow,
                 CreatedBy = $"CreatedBy{Guid.NewGuid():N}",
@@ -59,7 +58,6 @@ namespace AutoRest.Services.Tests
             var item = new LoyaltyCardRequestModel
             {
                 Id = Guid.NewGuid(),
-                LoyaltyCardType = LoyaltyCardTypes.StuffCard,
                 Number = $"Number{Guid.NewGuid():N}",
             };
 
@@ -74,7 +72,6 @@ namespace AutoRest.Services.Tests
                 Id = Guid.NewGuid(),
                 LastName = $"LastName{Guid.NewGuid():N}",
                 FirstName = $"FirstName{Guid.NewGuid():N}",
-                Patronymic = $"Patronymic{Guid.NewGuid():N}",
                 CreatedAt = DateTimeOffset.UtcNow,
                 CreatedBy = $"CreatedBy{Guid.NewGuid():N}",
                 UpdatedAt = DateTimeOffset.UtcNow,
@@ -92,7 +89,6 @@ namespace AutoRest.Services.Tests
                 Id = Guid.NewGuid(),
                 LastName = $"LastName{Guid.NewGuid():N}",
                 FirstName = $"FirstName{Guid.NewGuid():N}",
-                Patronymic = $"Patronymic{Guid.NewGuid():N}",
             };
 
             action?.Invoke(item);
@@ -132,7 +128,7 @@ namespace AutoRest.Services.Tests
             var item = new Table
             {
                 Id = Guid.NewGuid(),
-                Number = $"Number{Guid.NewGuid():N}",
+                Number = Random.Shared.Next(0, 100).ToString(),
                 CreatedAt = DateTimeOffset.UtcNow,
                 CreatedBy = $"CreatedBy{Guid.NewGuid():N}",
                 UpdatedAt = DateTimeOffset.UtcNow,
@@ -148,7 +144,7 @@ namespace AutoRest.Services.Tests
             var item = new TableRequestModel
             {
                 Id = Guid.NewGuid(),
-                Number = $"Number{Guid.NewGuid():N}",
+                Number = Random.Shared.Next(0, 100).ToString(),
             };
 
             action?.Invoke(item);

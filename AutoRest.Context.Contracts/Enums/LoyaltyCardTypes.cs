@@ -3,7 +3,7 @@
     /// <summary>
     /// Типы карт лояльности
     /// </summary>
-    public enum LoyaltyCardTypes
+    public enum LoyaltyCardType
     {
         /// <summary>
         /// Карта персонала

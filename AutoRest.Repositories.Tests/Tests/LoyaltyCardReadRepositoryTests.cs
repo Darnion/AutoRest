@@ -95,7 +95,7 @@ namespace AutoRest.Repositories.Tests.Tests
         /// Получение списка карт лояльности по идентификаторам возвращает пустую коллекцию
         /// </summary>
         [Fact]
-        public async Task GetByIdsSLoyaltyCardEmpty()
+        public async Task GetByIdsLoyaltyCardEmpty()
         {
             //Arrange
             var id1 = Guid.NewGuid();

@@ -35,6 +35,6 @@ namespace AutoRest.Repositories.Contracts
         /// <summary>
         /// Узнать существует ли <see cref="Employee"/> с таким ид
         /// </summary>
-        Task<bool> IsTypeAllowedAsync(Guid id, CancellationToken cancellationToken);
+        Task<bool> IsTypeNotAllowedAsync(Guid id, CancellationToken cancellationToken);
     }
 }

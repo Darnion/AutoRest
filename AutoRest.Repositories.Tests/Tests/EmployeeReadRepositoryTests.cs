@@ -3,6 +3,7 @@ using AutoRest.Repositories.Implementations;
 using FluentAssertions;
 using AutoRest.Context.Tests;
 using Xunit;
+using AutoRest.Context.Contracts.Enums;
 
 namespace AutoRest.Repositories.Tests.Tests
 {
@@ -95,7 +96,7 @@ namespace AutoRest.Repositories.Tests.Tests
         /// Получение списка работников по идентификаторам возвращает пустую коллекцию
         /// </summary>
         [Fact]
-        public async Task GetByIdsSEmployeesEmpty()
+        public async Task GetByIdsEmployeesEmpty()
         {
             //Arrange
             var id1 = Guid.NewGuid();
@@ -134,6 +135,43 @@ namespace AutoRest.Repositories.Tests.Tests
                 .And.HaveCount(2)
                 .And.ContainKey(target1.Id)
                 .And.ContainKey(target4.Id);
+        }
+
+        /// <summary>
+        /// Проверка должности по идентификатору работника (true)
+        /// </summary>
+        [Fact]
+        public async Task IsTypeNotAllowedReturnTrue()
+        {
+            //Arrange
+            var target = TestDataGenerator.Employee();
+            await Context.Employees.AddAsync(target);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await employeeReadRepository.IsTypeNotAllowedAsync(target.Id, CancellationToken);
+
+            // Assert
+            result.Should().BeTrue();
+        }
+
+        /// <summary>
+        /// Проверка должности по идентификатору работника (false)
+        /// </summary>
+        [Fact]
+        public async Task IsTypeNotAllowedReturnFalse()
+        {
+            //Arrange
+            var target = TestDataGenerator.Employee();
+            target.EmployeeType = EmployeeTypes.Сashier;
+            await Context.Employees.AddAsync(target);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await employeeReadRepository.IsTypeNotAllowedAsync(target.Id, CancellationToken);
+
+            // Assert
+            result.Should().BeFalse();
         }
     }
 }

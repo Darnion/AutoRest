@@ -95,7 +95,7 @@ namespace AutoRest.Repositories.Tests.Tests
         /// Получение списка персон по идентификаторам возвращает пустую коллекцию
         /// </summary>
         [Fact]
-        public async Task GetByIdsSPersonEmpty()
+        public async Task GetByIdsPersonEmpty()
         {
             //Arrange
             var id1 = Guid.NewGuid();

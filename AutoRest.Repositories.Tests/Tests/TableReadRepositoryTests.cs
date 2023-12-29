@@ -95,7 +95,7 @@ namespace AutoRest.Repositories.Tests.Tests
         /// Получение списка столиков по идентификаторам возвращает пустую коллекцию
         /// </summary>
         [Fact]
-        public async Task GetByIdsSTableEmpty()
+        public async Task GetByIdsTableEmpty()
         {
             //Arrange
             var id1 = Guid.NewGuid();

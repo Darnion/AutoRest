@@ -58,7 +58,7 @@ namespace AutoRest.Api.Validators.OrderItem
             RuleFor(x => x.EmployeeCashierId)
                 .MustAsync(async (id, CancellationToken) =>
                 {
-                    var employeeAllowed = await employeeReadRepository.IsTypeAllowedAsync(id!.Value, CancellationToken);
+                    var employeeAllowed = await employeeReadRepository.IsTypeNotAllowedAsync(id!.Value, CancellationToken);
                     return employeeAllowed;
                 })
                  .WithMessage("Работник не соответствует уровню допуска!");

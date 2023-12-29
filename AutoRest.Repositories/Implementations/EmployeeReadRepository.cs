@@ -51,7 +51,7 @@ namespace AutoRest.Repositories.Implementations
                 .ById(id)
                 .AnyAsync(cancellationToken);
 
-        Task<bool> IEmployeeReadRepository.IsTypeAllowedAsync(Guid id, CancellationToken cancellationToken)
+        Task<bool> IEmployeeReadRepository.IsTypeNotAllowedAsync(Guid id, CancellationToken cancellationToken)
            => reader.Read<Employee>()
                .NotDeletedAt()
                .ById(id)

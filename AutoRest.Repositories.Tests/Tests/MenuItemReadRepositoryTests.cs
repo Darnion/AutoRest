@@ -95,7 +95,7 @@ namespace AutoRest.Repositories.Tests.Tests
         /// Получение списка позиций по идентификаторам возвращает пустую коллекцию
         /// </summary>
         [Fact]
-        public async Task GetByIdsSMenuItemEmpty()
+        public async Task GetByIdsMenuItemEmpty()
         {
             //Arrange
             var id1 = Guid.NewGuid();

@@ -32,6 +32,46 @@ namespace AutoRest.Services.Tests.Tests
         }
 
         /// <summary>
+        /// Получение всех личностей возвращает empty
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnEmpty()
+        {
+            //Arrange
+
+            // Act
+            var result = await personService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should().BeEmpty();
+        }
+
+        /// <summary>
+        /// Получение всех личностей возвращает данные
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnValue()
+        {
+            //Arrange
+            var target = TestDataGenerator.Person();
+            var deletedTarget = TestDataGenerator.Person();
+
+            deletedTarget.DeletedAt = DateTimeOffset.UtcNow;
+
+            await Context.Persons.AddRangeAsync(target, deletedTarget);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await personService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should()
+                .NotBeNull()
+                .And.HaveCount(1)
+                .And.ContainSingle(x => x.Id == target.Id);
+        }
+
+        /// <summary>
         /// Получение личности по идентификатору возвращает null
         /// </summary>
         [Fact]

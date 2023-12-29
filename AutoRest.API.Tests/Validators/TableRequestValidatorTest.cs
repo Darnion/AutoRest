@@ -47,7 +47,7 @@ namespace AutoRest.Api.Tests.Validators
             //Arrange
             var model = new TableRequest
             {
-                Number = $"Number{Guid.NewGuid():N}",
+                Number = $"DGavzdVDVzdsf",
             };
 
             // Act
@@ -82,7 +82,7 @@ namespace AutoRest.Api.Tests.Validators
             //Arrange
             var model = new CreateTableRequest
             {
-                Number = $"Number{Guid.NewGuid():N}",
+                Number = $"gavcfgaegzbavs",
             };
 
             // Act

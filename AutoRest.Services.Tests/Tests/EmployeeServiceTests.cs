@@ -6,6 +6,7 @@ using AutoRest.Services.Implementations;
 using FluentAssertions;
 using AutoRest.Context.Tests;
 using Xunit;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 namespace AutoRest.Services.Tests.Tests
 {
@@ -30,6 +31,51 @@ namespace AutoRest.Services.Tests.Tests
                 new PersonReadRepository(Reader),
                 config.CreateMapper()
             );
+        }
+
+        /// <summary>
+        /// Получение всех работников возвращает empty
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnEmpty()
+        {
+            //Arrange
+
+            // Act
+            var result = await employeeService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should().BeEmpty();
+        }
+
+        /// <summary>
+        /// Получение всех работников возвращает данные
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnValue()
+        {
+            //Arrange
+            var target = TestDataGenerator.Employee();
+            var deletedTarget = TestDataGenerator.Employee();
+            var person = TestDataGenerator.Person();
+
+            await Context.Persons.AddAsync(person);
+
+            target.PersonId = person.Id;
+            deletedTarget.PersonId = person.Id;
+            deletedTarget.DeletedAt = DateTimeOffset.UtcNow;
+
+            await Context.Employees.AddRangeAsync(target, deletedTarget);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await employeeService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should()
+                .NotBeNull()
+                .And.HaveCount(1)
+                .And.ContainSingle(x => x.Id == target.Id);
         }
 
         /// <summary>

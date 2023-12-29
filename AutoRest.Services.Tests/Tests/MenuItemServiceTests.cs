@@ -32,6 +32,46 @@ namespace AutoRest.Services.Tests.Tests
         }
 
         /// <summary>
+        /// Получение всех позиций возвращает empty
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnEmpty()
+        {
+            //Arrange
+
+            // Act
+            var result = await menuItemService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should().BeEmpty();
+        }
+
+        /// <summary>
+        /// Получение всех позиций возвращает данные
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnValue()
+        {
+            //Arrange
+            var target = TestDataGenerator.MenuItem();
+            var deletedTarget = TestDataGenerator.MenuItem();
+
+            deletedTarget.DeletedAt = DateTimeOffset.UtcNow;
+
+            await Context.MenuItems.AddRangeAsync(target, deletedTarget);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await menuItemService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should()
+                .NotBeNull()
+                .And.HaveCount(1)
+                .And.ContainSingle(x => x.Id == target.Id);
+        }
+
+        /// <summary>
         /// Получение позиции по идентификатору возвращает null
         /// </summary>
         [Fact]

@@ -32,6 +32,46 @@ namespace AutoRest.Services.Tests.Tests
         }
 
         /// <summary>
+        /// Получение всех столиков возвращает empty
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnEmpty()
+        {
+            //Arrange
+
+            // Act
+            var result = await tableService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should().BeEmpty();
+        }
+
+        /// <summary>
+        /// Получение всех столиков возвращает данные
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnValue()
+        {
+            //Arrange
+            var target = TestDataGenerator.Table();
+            var deletedTarget = TestDataGenerator.Table();
+
+            deletedTarget.DeletedAt = DateTimeOffset.UtcNow;
+
+            await Context.Tables.AddRangeAsync(target, deletedTarget);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await tableService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should()
+                .NotBeNull()
+                .And.HaveCount(1)
+                .And.ContainSingle(x => x.Id == target.Id);
+        }
+
+        /// <summary>
         /// Получение столика по идентификатору возвращает null
         /// </summary>
         [Fact]

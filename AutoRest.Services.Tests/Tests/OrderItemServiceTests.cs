@@ -38,6 +38,63 @@ namespace AutoRest.Services.Tests.Tests
         }
 
         /// <summary>
+        /// Получение всех заказов возвращает empty
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnEmpty()
+        {
+            //Arrange
+
+            // Act
+            var result = await orderItemService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should().BeEmpty();
+        }
+
+        /// <summary>
+        /// Получение всех заказов возвращает данные
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnValue()
+        {
+            //Arrange
+            var target = TestDataGenerator.OrderItem();
+            var deletedTarget = TestDataGenerator.OrderItem();
+
+            var menuItem = TestDataGenerator.MenuItem();
+            await Context.MenuItems.AddAsync(menuItem);
+            var table = TestDataGenerator.Table();
+            await Context.Tables.AddAsync(table);
+            var person = TestDataGenerator.Person();
+            await Context.Persons.AddAsync(person);
+            var employeeWaiter = TestDataGenerator.Employee();
+            employeeWaiter.PersonId = person.Id;
+            await Context.Employees.AddAsync(employeeWaiter);
+
+            target.MenuItemId = menuItem.Id;
+            target.TableId = table.Id;
+            target.EmployeeWaiterId = employeeWaiter.Id;
+
+            deletedTarget.MenuItem = menuItem;
+            deletedTarget.TableId = table.Id;
+            deletedTarget.EmployeeWaiter = employeeWaiter;
+            deletedTarget.DeletedAt = DateTimeOffset.UtcNow;
+
+            await Context.OrderItems.AddRangeAsync(target, deletedTarget);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await orderItemService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should()
+                .NotBeNull()
+                .And.HaveCount(1)
+                .And.ContainSingle(x => x.Id == target.Id);
+        }
+
+        /// <summary>
         /// Получение заказа по идентификатору возвращает null
         /// </summary>
         [Fact]
@@ -90,16 +147,15 @@ namespace AutoRest.Services.Tests.Tests
             var target = TestDataGenerator.OrderItemRequestModel();
             var menuItem = TestDataGenerator.MenuItem();
             await Context.MenuItems.AddAsync(menuItem);
-            var loyaltyCard = TestDataGenerator.LoyaltyCard();
-            await Context.LoyaltyCards.AddAsync(loyaltyCard);
+            var table = TestDataGenerator.Table();
+            await Context.Tables.AddAsync(table);
             var person = TestDataGenerator.Person();
             await Context.Persons.AddAsync(person);
             var employeeWaiter = TestDataGenerator.Employee();
             employeeWaiter.PersonId = person.Id;
-            employeeWaiter.EmployeeType = EmployeeTypes.Waiter;
             await Context.Employees.AddAsync(employeeWaiter);
             target.MenuItemId = menuItem.Id;
-            target.LoyaltyCardId = loyaltyCard.Id;
+            target.TableId = table.Id;
             target.EmployeeWaiterId = employeeWaiter.Id;
 
             //Act
@@ -109,7 +165,7 @@ namespace AutoRest.Services.Tests.Tests
             var entity = Context.OrderItems.Single(x =>
                 x.Id == act.Id &&
                 x.EmployeeWaiterId == target.EmployeeWaiterId &&
-                x.LoyaltyCardId == target.LoyaltyCardId &&
+                x.TableId == target.TableId &&
                 x.MenuItemId == target.MenuItemId
             );
             entity.Should().NotBeNull();

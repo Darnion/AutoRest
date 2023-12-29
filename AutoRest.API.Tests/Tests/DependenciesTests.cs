@@ -6,7 +6,7 @@ using AutoRest.Api.Tests.Infrastructures;
 using Xunit;
 using AutoRest.Api.Controllers;
 
-namespace AutoRest.Api.Tests
+namespace AutoRest.API.Tests.Tests
 {
     /// <summary>
     /// Тесты зависимостей контроллеров

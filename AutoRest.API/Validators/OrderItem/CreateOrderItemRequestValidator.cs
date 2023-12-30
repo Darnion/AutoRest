@@ -54,6 +54,11 @@ namespace AutoRest.Api.Validators.OrderItem
             RuleFor(x => x.EmployeeCashierId)
                 .MustAsync(async (id, CancellationToken) =>
                 {
+                    if (!id.HasValue)
+                    {
+                        return true;
+                    }
+
                     var employeeAllowed = await employeeReadRepository.IsTypeNotAllowedAsync(id!.Value, CancellationToken);
                     return !employeeAllowed;
                 })

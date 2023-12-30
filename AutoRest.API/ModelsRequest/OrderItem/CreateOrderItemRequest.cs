@@ -22,7 +22,7 @@ namespace AutoRest.Api.ModelsRequest.OrderItem
         /// <summary>
         /// <inheritdoc cref="LoyaltyCardModel"/>
         /// </summary>
-        public Guid? LoyaltyCardId { get; set; } = Guid.Empty;
+        public Guid? LoyaltyCardId { get; set; }
 
         /// <summary>
         /// Статус заказа
@@ -32,6 +32,6 @@ namespace AutoRest.Api.ModelsRequest.OrderItem
         /// <summary>
         /// <inheritdoc cref="EmployeeModel"/>
         /// </summary>
-        public Guid? EmployeeCashierId { get; set; } = Guid.Empty;
+        public Guid? EmployeeCashierId { get; set; }
     }
 }

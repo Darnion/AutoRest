@@ -168,9 +168,6 @@ namespace AutoRest.Context.Migrations
                     b.Property<Guid?>("EmployeeCashierId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("EmployeeCashierId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("EmployeeWaiterId")
                         .HasColumnType("uniqueidentifier");
 
@@ -201,7 +198,7 @@ namespace AutoRest.Context.Migrations
 
                     b.HasIndex("EmployeeCashierId");
 
-                    b.HasIndex("EmployeeCashierId1");
+                    b.HasIndex("EmployeeWaiterId");
 
                     b.HasIndex("LoyaltyCardId");
 
@@ -312,13 +309,15 @@ namespace AutoRest.Context.Migrations
 
             modelBuilder.Entity("AutoRest.Context.Contracts.Models.OrderItem", b =>
                 {
-                    b.HasOne("AutoRest.Context.Contracts.Models.Employee", "EmployeeWaiter")
-                        .WithMany("OrderItem")
+                    b.HasOne("AutoRest.Context.Contracts.Models.Employee", "EmployeeCashier")
+                        .WithMany("OrderCashier")
                         .HasForeignKey("EmployeeCashierId");
 
-                    b.HasOne("AutoRest.Context.Contracts.Models.Employee", "EmployeeCashier")
-                        .WithMany()
-                        .HasForeignKey("EmployeeCashierId1");
+                    b.HasOne("AutoRest.Context.Contracts.Models.Employee", "EmployeeWaiter")
+                        .WithMany("OrderWaiter")
+                        .HasForeignKey("EmployeeWaiterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AutoRest.Context.Contracts.Models.LoyaltyCard", "LoyaltyCard")
                         .WithMany("OrderItem")
@@ -349,7 +348,9 @@ namespace AutoRest.Context.Migrations
 
             modelBuilder.Entity("AutoRest.Context.Contracts.Models.Employee", b =>
                 {
-                    b.Navigation("OrderItem");
+                    b.Navigation("OrderCashier");
+
+                    b.Navigation("OrderWaiter");
                 });
 
             modelBuilder.Entity("AutoRest.Context.Contracts.Models.LoyaltyCard", b =>

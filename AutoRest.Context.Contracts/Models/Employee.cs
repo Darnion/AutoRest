@@ -21,8 +21,13 @@ namespace AutoRest.Context.Contracts.Models
         public Person Person { get; set; }
 
         /// <summary>
-        /// Нужна для связи один ко многим по вторичному ключу <see cref="OrderItem"/>
+        /// Нужна для связи один ко многим по вторичному ключу <see cref="OrderWaiter"/>
         /// </summary>
-        public ICollection<OrderItem>? OrderItem { get; set; }
+        public ICollection<OrderItem>? OrderWaiter { get; set; }
+
+        /// <summary>
+        /// Нужна для связи один ко многим по вторичному ключу <see cref="OrderWaiter"/>
+        /// </summary>
+        public ICollection<OrderItem>? OrderCashier { get; set; }
     }
 }

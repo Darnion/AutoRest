@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace AutoRest.Context.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class RestartDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,7 +17,7 @@ namespace AutoRest.Context.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoyaltyCardType = table.Column<int>(type: "int", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -33,7 +34,7 @@ namespace AutoRest.Context.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     Cost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
@@ -51,9 +52,9 @@ namespace AutoRest.Context.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Patronymic = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    Patronymic = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -70,7 +71,7 @@ namespace AutoRest.Context.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Number = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     UpdatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -114,7 +115,7 @@ namespace AutoRest.Context.Migrations
                     EmployeeWaiterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TableId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MenuItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    LoyaltyCardId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    LoyaltyCardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     OrderStatus = table.Column<bool>(type: "bit", nullable: false),
                     EmployeeCashierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
@@ -132,11 +133,16 @@ namespace AutoRest.Context.Migrations
                         principalTable: "Employees",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_OrderItems_Employees_EmployeeWaiterId",
+                        column: x => x.EmployeeWaiterId,
+                        principalTable: "Employees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_OrderItems_LoyaltyCards_LoyaltyCardId",
                         column: x => x.LoyaltyCardId,
                         principalTable: "LoyaltyCards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_OrderItems_MenuItems_MenuItemId",
                         column: x => x.MenuItemId,
@@ -157,9 +163,11 @@ namespace AutoRest.Context.Migrations
                 column: "EmployeeType");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_PersonId",
+                name: "IX_Employee_PersonId",
                 table: "Employees",
-                column: "PersonId");
+                column: "PersonId",
+                unique: true,
+                filter: "DeletedAt is null");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LoyaltyCard_LoyaltyCardType",
@@ -180,6 +188,11 @@ namespace AutoRest.Context.Migrations
                 name: "IX_OrderItems_EmployeeCashierId",
                 table: "OrderItems",
                 column: "EmployeeCashierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_EmployeeWaiterId",
+                table: "OrderItems",
+                column: "EmployeeWaiterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItems_LoyaltyCardId",

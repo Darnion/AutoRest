@@ -119,106 +119,98 @@ namespace AutoRest.Api.Tests.Tests
                 .And.NotContain(x => x.Id == orderitem2.Id);
         }
 
-        ///// <summary>
-        ///// Добавление заказа
-        ///// </summary>
-        //[Fact]
-        //public async Task AddShouldWork()
-        //{
-        //    // Arrange
-        //    var client = factory.CreateClient();
+        /// <summary>
+        /// Добавление заказа
+        /// </summary>
+        [Fact]
+        public async Task AddShouldWork()
+        {
+            // Arrange
+            var client = factory.CreateClient();
 
-        //    var menuItemModel = TestDataGenerator.MenuItemModel();
-        //    var tableModel = TestDataGenerator.TableModel();
-        //    var personModel = TestDataGenerator.PersonModel();
-        //    var employeeModel = TestDataGenerator.EmployeeModel();
+            var target = new CreateOrderItemRequest {
+                EmployeeWaiterId = employee1.Id,
+                TableId = table.Id,
+                MenuItemId = menuItem.Id,
+            };
 
-        //    employeeModel.Person = personModel;
+            // Act
+            string data = JsonConvert.SerializeObject(target);
+            var contextdata = new StringContent(data, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("/OrderItem", contextdata);
+            var resultString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<OrderItemResponse>(resultString);
 
-        //    var person1 = mapper.Map<Person>(personModel);
-        //    var table1 = mapper.Map<Table>(tableModel);
-        //    var menuItem1 = mapper.Map<MenuItem>(menuItemModel);
-        //    var employee1 = mapper.Map<Employee>(employeeModel);
+            var orderitemAdded = context.OrderItems.Single(x => x.Id == result!.Id);
 
-        //    employee1.PersonId = person1.Id;
+            // Assert          
+            orderitemAdded.Should()
+                .NotBeNull();
+        }
 
-        //    await context.Persons.AddAsync(person1);
-        //    await context.Employees.AddAsync(employee1);
-        //    await context.Tables.AddAsync(table1);
-        //    await context.MenuItems.AddAsync(menuItem1);
-        //    await unitOfWork.SaveChangesAsync();
+        /// <summary>
+        /// Изменение заказа
+        /// </summary>
+        [Fact]
+        public async Task EditShouldWork()
+        {
+            // Arrange
+            var client = factory.CreateClient();
 
-        //    var target = TestDataGenerator.OrderItemModel();
+            var orderitem = TestDataGenerator.OrderItem();
 
-        //    target.EmployeeWaiter = personModel;
-        //    target.Table = tableModel;
-        //    target.MenuItem = menuItemModel;
+            orderitem.EmployeeWaiterId = employee1.Id;
+            orderitem.TableId = table.Id;
+            orderitem.MenuItemId = menuItem.Id;
+            await context.OrderItems.AddAsync(orderitem);
+            await unitOfWork.SaveChangesAsync();
 
-        //    var orderitem = mapper.Map<CreateOrderItemRequest>(target);
+            var orderitemRequest = new OrderItemRequest
+            {
+                Id = orderitem.Id,
+                EmployeeWaiterId = employee2.Id,
+                TableId = table.Id,
+                MenuItemId = menuItem.Id,
+            };
 
-        //    // Act
-        //    string data = JsonConvert.SerializeObject(orderitem);
-        //    var contextdata = new StringContent(data, Encoding.UTF8, "application/json");
-        //    var response = await client.PostAsync("/OrderItem", contextdata);
-        //    var resultString = await response.Content.ReadAsStringAsync();
-        //    var result = JsonConvert.DeserializeObject<OrderItemResponse>(resultString);
+            // Act
+            string data = JsonConvert.SerializeObject(orderitemRequest);
+            var contextdata = new StringContent(data, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync("/OrderItem", contextdata);
+            var resultString = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<OrderItemResponse>(resultString);
 
-        //    var orderitemAdded = context.OrderItems.Single(x => x.Id == result!.Id);
+            var orderitemEdited = context.OrderItems.Single(x => x.Id == result.Id
+                                                        && x.EmployeeWaiterId == orderitemRequest.EmployeeWaiterId);
 
-        //    // Assert          
-        //    orderitemAdded.Should()
-        //        .NotBeNull();
-        //}
+            // Assert          
+            orderitemEdited.Should()
+                .NotBeNull();
+        }
 
-        ///// <summary>
-        ///// Изменение заказа
-        ///// </summary>
-        //[Fact]
-        //public async Task EditShouldWork()
-        //{
-        //    // Arrange
-        //    var client = factory.CreateClient();
+        /// <summary>
+        /// Удаление заказа
+        /// </summary>
+        [Fact]
+        public async Task DeleteShouldWork()
+        {
+            // Arrange
+            var client = factory.CreateClient();
 
-        //    var orderitem = TestDataGenerator.OrderItem();
-        //    await context.OrderItems.AddAsync(orderitem);
-        //    await unitOfWork.SaveChangesAsync();
+            var orderitem = TestDataGenerator.OrderItem();
+            orderitem.EmployeeWaiterId = employee1.Id;
+            orderitem.TableId = table.Id;
+            orderitem.MenuItemId = menuItem.Id;
+            await context.OrderItems.AddAsync(orderitem);
+            await unitOfWork.SaveChangesAsync();
 
-        //    var orderitemRequest = mapper.Map<OrderItemRequest>(TestDataGenerator.OrderItemModel(x => x.Id = orderitem.Id));
-        //    orderitemRequest.OrderStatus = false;
+            // Act
+            var response = await client.DeleteAsync(($"/OrderItem/{orderitem.Id}"));
 
-        //    // Act
-        //    string data = JsonConvert.SerializeObject(orderitemRequest);
-        //    var contextdata = new StringContent(data, Encoding.UTF8, "application/json");
-        //    var response = await client.PutAsync("/OrderItem", contextdata);
+            var orderitemDeleted = context.OrderItems.Single(x => x.Id == orderitem.Id);
 
-        //    var orderitemEdited = context.OrderItems.Single(x => x.Id == orderitem.Id
-        //                                                && x.OrderStatus == orderitemRequest.OrderStatus);
-
-        //    // Assert          
-        //    orderitemEdited.Should()
-        //        .NotBeNull();
-        //}
-
-        ///// <summary>
-        ///// Удаление заказа
-        ///// </summary>
-        //[Fact]
-        //public async Task DeleteShouldWork()
-        //{
-        //    // Arrange
-        //    var client = factory.CreateClient();
-
-        //    var orderitem = TestDataGenerator.OrderItem();
-        //    await context.OrderItems.AddAsync(orderitem);
-        //    await unitOfWork.SaveChangesAsync();
-
-        //    // Act
-        //    var response = await client.DeleteAsync(($"/OrderItem/{orderitem.Id}"));
-
-        //    var orderitemDeleted = context.OrderItems.Single(x => x.Id == orderitem.Id);
-
-        //    // Assert
-        //    orderitemDeleted.DeletedAt.Should().NotBeNull();
-        //}
+            // Assert
+            orderitemDeleted.DeletedAt.Should().NotBeNull();
+        }
     }
 }

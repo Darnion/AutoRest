@@ -65,7 +65,8 @@ namespace AutoRest.Api.Infrastructures
                     : string.Empty))
                 .ForMember(x => x.EmployeeType, opt => opt.MapFrom(x => x.EmployeeType));
             CreateMap<EmployeeModel, Employee>(MemberList.Destination)
-                .ForMember(x => x.OrderItem, next => next.Ignore())
+                .ForMember(x => x.OrderWaiter, next => next.Ignore())
+                .ForMember(x => x.OrderCashier, next => next.Ignore())
                 .ForMember(x => x.CreatedAt, next => next.Ignore())
                 .ForMember(x => x.CreatedBy, next => next.Ignore())
                 .ForMember(x => x.UpdatedAt, next => next.Ignore())

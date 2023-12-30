@@ -14,9 +14,13 @@ namespace AutoRest.Context.Configuration
             builder.Property(x => x.PersonId).IsRequired();
 
             builder
-               .HasMany(x => x.OrderItem)
+               .HasMany(x => x.OrderWaiter)
                .WithOne(x => x.EmployeeWaiter)
-               .HasForeignKey(x => x.EmployeeWaiterId)
+               .HasForeignKey(x => x.EmployeeWaiterId);
+
+            builder
+               .HasMany(x => x.OrderCashier)
+               .WithOne(x => x.EmployeeCashier)
                .HasForeignKey(x => x.EmployeeCashierId);
 
             builder.HasIndex(x => x.EmployeeType)

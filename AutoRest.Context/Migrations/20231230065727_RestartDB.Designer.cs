@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoRest.Context.Migrations
 {
     [DbContext(typeof(AutoRestContext))]
-    [Migration("20231221210559_Init")]
-    partial class Init
+    [Migration("20231230065727_RestartDB")]
+    partial class RestartDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,7 +61,10 @@ namespace AutoRest.Context.Migrations
                     b.HasIndex("EmployeeType")
                         .HasDatabaseName("IX_Employee_EmployeeType");
 
-                    b.HasIndex("PersonId");
+                    b.HasIndex("PersonId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_Employee_PersonId")
+                        .HasFilter("DeletedAt is null");
 
                     b.ToTable("Employees", (string)null);
                 });
@@ -88,7 +91,8 @@ namespace AutoRest.Context.Migrations
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -128,7 +132,8 @@ namespace AutoRest.Context.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -169,7 +174,7 @@ namespace AutoRest.Context.Migrations
                     b.Property<Guid>("EmployeeWaiterId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("LoyaltyCardId")
+                    b.Property<Guid?>("LoyaltyCardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("MenuItemId")
@@ -195,6 +200,8 @@ namespace AutoRest.Context.Migrations
                         .HasDatabaseName("IX_OrderItem_CreatedAt");
 
                     b.HasIndex("EmployeeCashierId");
+
+                    b.HasIndex("EmployeeWaiterId");
 
                     b.HasIndex("LoyaltyCardId");
 
@@ -224,14 +231,17 @@ namespace AutoRest.Context.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("Patronymic")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -268,7 +278,8 @@ namespace AutoRest.Context.Migrations
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
                         .HasColumnType("datetimeoffset");
@@ -301,15 +312,19 @@ namespace AutoRest.Context.Migrations
 
             modelBuilder.Entity("AutoRest.Context.Contracts.Models.OrderItem", b =>
                 {
-                    b.HasOne("AutoRest.Context.Contracts.Models.Employee", "Employee")
-                        .WithMany("OrderItem")
+                    b.HasOne("AutoRest.Context.Contracts.Models.Employee", "EmployeeCashier")
+                        .WithMany("OrderCashier")
                         .HasForeignKey("EmployeeCashierId");
+
+                    b.HasOne("AutoRest.Context.Contracts.Models.Employee", "EmployeeWaiter")
+                        .WithMany("OrderWaiter")
+                        .HasForeignKey("EmployeeWaiterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("AutoRest.Context.Contracts.Models.LoyaltyCard", "LoyaltyCard")
                         .WithMany("OrderItem")
-                        .HasForeignKey("LoyaltyCardId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LoyaltyCardId");
 
                     b.HasOne("AutoRest.Context.Contracts.Models.MenuItem", "MenuItem")
                         .WithMany("OrderItem")
@@ -323,7 +338,9 @@ namespace AutoRest.Context.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
+                    b.Navigation("EmployeeCashier");
+
+                    b.Navigation("EmployeeWaiter");
 
                     b.Navigation("LoyaltyCard");
 
@@ -334,7 +351,9 @@ namespace AutoRest.Context.Migrations
 
             modelBuilder.Entity("AutoRest.Context.Contracts.Models.Employee", b =>
                 {
-                    b.Navigation("OrderItem");
+                    b.Navigation("OrderCashier");
+
+                    b.Navigation("OrderWaiter");
                 });
 
             modelBuilder.Entity("AutoRest.Context.Contracts.Models.LoyaltyCard", b =>

@@ -14,25 +14,30 @@ namespace AutoRest.Api.Tests.Tests
     [Collection(nameof(AutoRestApiTestCollection))]
     public class OrderItemIntegrationTests : BaseIntegrTest
     {
-        private readonly Employee employeeWaiter;
-        private readonly Person person;
+        private readonly Employee employee1, employee2;
+        private readonly Person person1, person2;
         private readonly Table table;
         private readonly MenuItem menuItem;
 
         public OrderItemIntegrationTests(AutoRestApiFixture fixture) : base(fixture)
         {
-            employeeWaiter = TestDataGenerator.Employee();
-            person = TestDataGenerator.Person();
+            person1 = TestDataGenerator.Person();
+            person2 = TestDataGenerator.Person();
+            context.Persons.AddRangeAsync(person1, person2);
+
+            employee1 = TestDataGenerator.Employee();
+            employee2 = TestDataGenerator.Employee();
+            employee1.PersonId = person1.Id;
+            employee2.PersonId = person2.Id;
+            context.Employees.AddRangeAsync(employee1, employee2);
+
             table = TestDataGenerator.Table();
-            menuItem = TestDataGenerator.MenuItem();
-
-            employeeWaiter.PersonId = person.Id;
-
-            context.Persons.AddAsync(person);
-            context.Employees.AddAsync(employeeWaiter);
             context.Tables.AddAsync(table);
+
+            menuItem = TestDataGenerator.MenuItem();
             context.MenuItems.AddAsync(menuItem);
-            unitOfWork.SaveChangesAsync();
+
+            unitOfWork.SaveChangesAsync().Wait();
         }
 
         /// <summary>
@@ -44,34 +49,22 @@ namespace AutoRest.Api.Tests.Tests
             // Arrange
             var client = factory.CreateClient();
 
-            var orderitem1 = TestDataGenerator.OrderItem();
-            var orderitem2 = TestDataGenerator.OrderItem();
+            var orderItem1 = TestDataGenerator.OrderItem();
+            var orderItem2 = TestDataGenerator.OrderItem();
 
-            orderitem1.EmployeeWaiterId = employeeWaiter.Id;
-            orderitem1.TableId = table.Id;
-            orderitem1.MenuItemId = menuItem.Id;
+            orderItem1.EmployeeWaiterId = employee1.Id;
+            orderItem1.TableId = table.Id;
+            orderItem1.MenuItemId = menuItem.Id;
 
-            var employeeWaiter2 = TestDataGenerator.Employee();
-            var person2 = TestDataGenerator.Person();
-            var table2 = TestDataGenerator.Table();
-            var menuItem2 = TestDataGenerator.MenuItem();
+            orderItem2.EmployeeWaiterId = employee2.Id;
+            orderItem2.TableId = table.Id;
+            orderItem2.MenuItemId = menuItem.Id;
 
-            employeeWaiter2.PersonId = person2.Id;
-
-            await context.Persons.AddAsync(person2);
-            await context.Employees.AddAsync(employeeWaiter2);
-            await context.Tables.AddAsync(table2);
-            await context.MenuItems.AddAsync(menuItem2);
-
-            orderitem2.EmployeeWaiterId = employeeWaiter2.Id;
-            orderitem2.TableId = table2.Id;
-            orderitem2.MenuItemId = menuItem2.Id;
-
-            await context.OrderItems.AddRangeAsync(orderitem1, orderitem2);
+            await context.OrderItems.AddRangeAsync(orderItem1, orderItem2);
             await unitOfWork.SaveChangesAsync();
 
             // Act
-            var response = await client.GetAsync($"/OrderItem/{orderitem1.Id}");
+            var response = await client.GetAsync($"/OrderItem/{orderItem1.Id}");
 
             // Assert
             response.EnsureSuccessStatusCode();
@@ -83,7 +76,7 @@ namespace AutoRest.Api.Tests.Tests
                 .And
                 .BeEquivalentTo(new
                 {
-                    orderitem1.Id,
+                    orderItem1.Id,
                 });
         }
 
@@ -99,25 +92,13 @@ namespace AutoRest.Api.Tests.Tests
             var orderitem1 = TestDataGenerator.OrderItem();
             var orderitem2 = TestDataGenerator.OrderItem();
 
-            orderitem1.EmployeeWaiterId = employeeWaiter.Id;
+            orderitem1.EmployeeWaiterId = employee1.Id;
             orderitem1.TableId = table.Id;
             orderitem1.MenuItemId = menuItem.Id;
 
-            var employeeWaiter2 = TestDataGenerator.Employee();
-            var person2 = TestDataGenerator.Person();
-            var table2 = TestDataGenerator.Table();
-            var menuItem2 = TestDataGenerator.MenuItem();
-
-            employeeWaiter2.PersonId = person2.Id;
-
-            await context.Persons.AddAsync(person2);
-            await context.Employees.AddAsync(employeeWaiter2);
-            await context.Tables.AddAsync(table2);
-            await context.MenuItems.AddAsync(menuItem2);
-
-            orderitem2.EmployeeWaiterId = employeeWaiter2.Id;
-            orderitem2.TableId = table2.Id;
-            orderitem2.MenuItemId = menuItem2.Id;
+            orderitem2.EmployeeWaiterId = employee2.Id;
+            orderitem2.TableId = table.Id;
+            orderitem2.MenuItemId = menuItem.Id;
 
             orderitem2.DeletedAt = DateTimeOffset.UtcNow;
 

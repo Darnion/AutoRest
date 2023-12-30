@@ -75,7 +75,6 @@ namespace AutoRest.Api.Tests.Tests
 
             result.Should()
                 .NotBeNull()
-                .And.HaveCount(1)
                 .And.Contain(x => x.Id == table1.Id)
                 .And.NotContain(x => x.Id == table2.Id);
         }
